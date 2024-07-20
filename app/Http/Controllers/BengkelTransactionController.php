@@ -71,8 +71,8 @@ class BengkelTransactionController extends Controller
         $bengkel_id = $bengkel->id;
 
         $booking = Booking::findOrFail($bookingId);
-        $products = Product::where('bengkel_id', $booking->id)->get();
-        $services = Layanan::where('bengkel_id', $booking->id)->get();
+        $products = Product::where('bengkel_id', $bengkel_id)->get();
+        $services = Layanan::where('bengkel_id', $bengkel_id)->get();
         $carts = BengkelCart::where('booking_id', $bookingId)->get();
 
         // Calculate total price

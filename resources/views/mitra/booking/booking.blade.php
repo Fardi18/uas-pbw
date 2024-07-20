@@ -62,12 +62,8 @@
                                                             <a href="booking/{{ $booking->id }}"
                                                                 class="btn btn-sm btn-primary">Detail
                                                                 Booking</a>
-                                                            {{-- <a href="{{ route('mitra.add.transaction', $booking) }}"
-                                                                class="btn btn-sm btn-success">Buat Transaksi</a> --}}
-                                                            @if ($booking->transactions->isEmpty())
-                                                                <a href="{{ route('mitra.add.transaction', $booking) }}"
-                                                                    class="btn btn-sm btn-success">Buat Transaksi</a>
-                                                            @endif
+                                                            <a href="{{ route('mitra.add.transaction', $booking) }}"
+                                                                class="btn btn-sm btn-success">Buat Transaksi</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
