@@ -16,7 +16,6 @@
                 @if ($bookings->isEmpty())
                     <p><i class="text-warning">Ups, Kamu belum memiliki data booking</i></p>
                 @else
-                    @foreach ($bookings as $booking)
                         <div class="col">
                             <table class="table">
                                 <thead>
@@ -29,6 +28,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($bookings as $booking)
                                     <tr>
                                         <th scope="row">{{ $booking->id }}</th>
                                         <td>{{ $booking->bengkel->name }}</td>
@@ -38,10 +38,11 @@
                                             <a href="/profile-booking/{{ $booking->id }}">Detail Booking</a>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
+                                
                             </table>
                         </div>
-                    @endforeach
                 @endif
             </div>
         </div>
