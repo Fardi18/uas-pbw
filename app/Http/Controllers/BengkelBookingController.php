@@ -20,7 +20,9 @@ class BengkelBookingController extends Controller
         });
 
         $transaksi = Booking::with(['user', 'bengkel'])
-            ->whereIn('bengkel_id', $bengkel_ids)->get();
+            ->whereIn('bengkel_id', $bengkel_ids)
+            ->with('transactions')
+            ->get();
         return view('mitra.booking.booking', ['bookings' => $transaksi], $item);
     }
 

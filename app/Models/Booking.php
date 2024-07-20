@@ -44,4 +44,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Layanan::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
