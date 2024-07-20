@@ -16,19 +16,19 @@
                 @if ($bookings->isEmpty())
                     <p><i class="text-warning">Ups, Kamu belum memiliki data booking</i></p>
                 @else
-                    <div class="col">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Nama Bengkel</th>
-                                    <th scope="col">Waktu Booking</th>
-                                    <th scope="col">Status Booking</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($bookings as $booking)
+                    @foreach ($bookings as $booking)
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nama Bengkel</th>
+                                        <th scope="col">Waktu Booking</th>
+                                        <th scope="col">Status Booking</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <th scope="row">{{ $booking->id }}</th>
                                         <td>{{ $booking->bengkel->name }}</td>
@@ -38,10 +38,10 @@
                                             <a href="/profile-booking/{{ $booking->id }}">Detail Booking</a>
                                         </td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
                 @endif
             </div>
         </div>
