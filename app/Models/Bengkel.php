@@ -15,7 +15,9 @@ class Bengkel extends Model
         'description',
         'alamat',
         'pemilik_id',
-        'link_alamat'
+        'kecamatan_id',
+        'kelurahan_id',
+        'link_alamat',
     ];
 
     public function layanans()
@@ -33,8 +35,23 @@ class Bengkel extends Model
         return $this->hasMany(Jadwal::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function pemilik_bengkel()
     {
         return $this->belongsTo(PemilikBengkel::class);
+    }
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
+
+    public function kelurahan()
+    {
+        return $this->belongsTo(Kelurahan::class);
     }
 }

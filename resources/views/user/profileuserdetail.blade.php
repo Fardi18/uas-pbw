@@ -34,6 +34,16 @@
                             value="{{ $users->phone_number }}" disabled>
                     </div>
                     <div class="form">
+                        <label for="kecamatan" class="form-label">Kecamatan</label>
+                        <input type="text" class="form-control" id="kecamatan" name="kecamatan"
+                            value="{{ $users->kecamatan->name }}" disabled>
+                    </div>
+                    <div class="form">
+                        <label for="kelurahan" class="form-label">Kelurahan</label>
+                        <input type="text" class="form-control" id="kelurahan" name="kelurahan"
+                            value="{{ $users->kelurahan->name }}" disabled>
+                    </div>
+                    <div class="form">
                         <label for="alamat" class="form-label">Alamat</label>
                         <input type="text" class="form-control" id="alamat" name="alamat"
                             value="{{ $users->alamat }}" disabled>

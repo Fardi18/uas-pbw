@@ -42,9 +42,10 @@
                             <td>
                                 <p>{{ $item->alamat }}</p>
                             </td>
-                            <td><a href="/adminlistbengkel/{{ $item->id }}/delete"
+                            <td><a href="/admin-listbengkel/{{ $item->id }}/delete"
                                     class="btn btn-danger text-white">Hapus</a>
-                                <a href="/detailbengkel/{{ $item->id }}" class="btn btn-warning text-white">Detail</a>
+                                <a href="/admin-detailbengkel/{{ $item->id }}"
+                                    class="btn btn-warning text-white">Detail</a>
                             </td>
                         </tr>
                     @endforeach

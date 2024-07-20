@@ -64,10 +64,20 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('showlistbooking') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            List Booking
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('showlisttransaction') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            List Transaksi
+                            List Transaction
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

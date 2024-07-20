@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\KecamatanSeeder;
+use Database\Seeders\KelurahanSeeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,25 +26,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        DB::table('users')->insert([
-            [
-                'name' => 'User1',
-                'email' => 'user1@gmail.com',
-                'phone_number' => '083891428869',
-                'alamat' => 'Kabupaten Tangerang',
-                'password' => Hash::make('password'),
-            ]
-        ]);
-
-        DB::table('pemilik_bengkels')->insert([
-            [
-                'name' => 'Owner1',
-                'email' => 'owner1@gmail.com',
-                'phone_number' => '083891428869',
-                'password' => Hash::make('password'),
-            ],
-        ]);
-
         DB::table('category_kendaraans')->insert([
             [
                 'name' => 'Mobil',
@@ -51,5 +34,8 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Motor',
             ]
         ]);
+
+        $this->call(KecamatanSeeder::class);
+        $this->call(KelurahanSeeder::class);
     }
 }

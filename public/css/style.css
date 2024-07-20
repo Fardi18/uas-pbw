@@ -52,7 +52,7 @@ nav .kanan .signup {
 /* Footer */
 .footer {
     background-color: #3c486b;
-    min-height: 60vh;
+    /* min-height: 60vh; */
 }
 
 .footer h2 {
@@ -184,9 +184,9 @@ nav .kanan .signup {
     margin: 100px 0 200px 0;
 }
 
-.service form input {
+/* .service form input {
     height: 60px;
-}
+} */
 
 .service a.icon-mobil,
 a.icon-motor {
@@ -406,13 +406,13 @@ a.icon-motor {
     margin-bottom: 200px;
 }
 
-label {
+/* label {
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0.01em;
-}
+} */
 
 input {
     height: 45px;
@@ -574,7 +574,7 @@ section {
 .team4 {
     color: #8d97ad;
     font-weight: 300;
-    padding-top: 100px!important;
+    padding-top: 100px !important;
 }
 
 .team4 h1,

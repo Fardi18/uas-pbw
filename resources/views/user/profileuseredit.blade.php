@@ -50,6 +50,27 @@
                             </div>
                         @enderror
                     </div>
+
+                    <div class="form">
+                        <label for="kecamatan_id" class="form-label">Kecamatan</label>
+                        <select class="form-select" aria-label="Default select example" name="kecamatan_id">
+                            <option selected>-- Pilih Kecamatan --</option>
+                            @foreach ($kecamatans as $kecamatan)
+                                <option value="{{ $kecamatan->id }}">{{ $kecamatan->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form">
+                        <label for="kelurahan_id" class="form-label">Kelurahan</label>
+                        <select class="form-select" aria-label="Default select example" name="kelurahan_id">
+                            <option selected>-- Pilih Kelurahan --</option>
+                            @foreach ($kelurahans as $kelurahan)
+                                <option value="{{ $kelurahan->id }}">{{ $kelurahan->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form">
                         <label for="alamat" class="form-label">Alamat</label>
                         <input type="text" class="form-control" id="alamat" name="alamat"

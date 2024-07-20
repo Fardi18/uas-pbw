@@ -65,6 +65,8 @@
             </section>
             <!-- /.content -->
         </div>
+
+
         <!-- /.content-wrapper -->
 
         <!-- /.control-sidebar -->
@@ -97,6 +99,9 @@
     <script src="{{ asset('/lte') }}/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('/lte') }}/dist/js/pages/dashboard2.js"></script>
+
+    {{-- custom js --}}
+    @stack('javascript')
 </body>
 
 </html>

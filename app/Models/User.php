@@ -22,7 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'phone_number',
-        'alamat'
+        'alamat',
+        'kecamatan_id',
+        'kelurahan_id',
     ];
 
     /**
@@ -44,8 +46,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function kendaraans()
+    public function kecamatan()
     {
-        return $this->hasMany(Kendaraan::class);
+        return $this->belongsTo(kecamatan::class);
+    }
+
+    public function kelurahan()
+    {
+        return $this->belongsTo(Kelurahan::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

@@ -1,4 +1,4 @@
-<div class="footer pt-5">
+<div class="footer py-5">
     <div class="container">
         <div class="row row-cols-lg-3 row-cols-1 justify-content-between">
             <div class="col col-lg-6 mb-lg-0 mb-4">
@@ -16,8 +16,8 @@
                 <a href="{{ url('/servicepage') }}" class="text-white-50 mt-2">
                     Service
                 </a>
-                <a href="{{ url('/aboutpage') }}" class="text-white-50 mt-2">
-                    About Us
+                <a href="{{ url('/productpage') }}" class="text-white-50 mt-2">
+                    Produk
                 </a>
                 @guest
                     <a href="{{ route('login') }}" class="text-white-50 mt-2">
@@ -25,20 +25,15 @@
                     </a>
                 @endguest
             </div>
-            <div class="col col-lg-3 d-flex flex-column mb-lg-0 mb-4">
+            <div class="col col-lg-3 d-flex flex-column mb-lg-0">
                 <h5 class="fw-bold text-white mb-3">Contact</h5>
                 <a href="" class="text-white-50 mt-2">
                     Our Instagram
                 </a>
                 <a href="" class="text-white-50 mt-2">
-                    Our Github
+                    Tangerang Selatan
                 </a>
                 <p class="text-white-50 mt-2">Indonesia</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p class="text-white text-center copytext">&copy; Copyright 2024 by Kelompok 4, All Right Reserved.</p>
             </div>
         </div>
     </div>

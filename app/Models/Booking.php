@@ -12,20 +12,17 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'bengkel_id',
         'user_id',
-        'kendaraan_id',
-        'layanan_id',
+        'bengkel_id',
         'waktu_booking',
+        'brand',
+        'model',
+        'plat',
+        'tahun_pembuatan',
+        'kilometer',
+        'transmisi',
+        'booking_status',
         'catatan_tambahan',
-        'status',
-        'tipe_booking',
-        'qty'
-    ];
-
-    protected $casts = [
-        'status' => BookingStatus::class,
-        'tipe_booking' => BookingType::class
     ];
 
     public function detail_layanan_bookings()
@@ -43,13 +40,13 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function kendaraan()
-    {
-        return $this->belongsTo(Kendaraan::class);
-    }
-
     public function layanans()
     {
         return $this->belongsTo(Layanan::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

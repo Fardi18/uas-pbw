@@ -16,7 +16,7 @@
                     <a class="nav-link" href="{{ url('servicepage') }}">Services</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="{{ url('aboutpage') }}">About Us</a>
+                    <a class="nav-link" href="{{ url('productpage') }}">Product</a>
                 </li>
             </ul>
             <div class="kanan navbar-nav ml-auto">
@@ -35,6 +35,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a class="dropdown-item" href="{{ '/profileuser' }}">Profile User</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ '/cart' }}">Keranjang</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">

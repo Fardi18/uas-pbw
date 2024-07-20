@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Bengkel;
 use App\Models\Booking;
-use App\Models\DetailLayananBooking;
 use App\Models\Kendaraan;
-use App\Models\PemilikBengkel;
-use App\Models\User;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\PemilikBengkel;
+use App\Models\DetailLayananBooking;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -31,8 +32,8 @@ class AdminController extends Controller
     public function detailuser($id)
     {
         $user['users'] = User::findOrfail($id);
-        $datakendaraan['kendaraans'] = Kendaraan::with(['user', 'category_kendaraan'])->get();
-        return view('admin/detailuser', $datakendaraan, ['users' => $user]);
+
+        return view('admin/detailuser', ['users' => $user]);
     }
 
     public function destroyuser($id)
@@ -80,22 +81,34 @@ class AdminController extends Controller
         return redirect(route('showlistbengkel'))->with('success', 'Bengkel Berhasil Dihapus!');
     }
 
-    public function listtransaction()
+    public function listbooking()
     {
-        $transaksi = Booking::with(['kendaraan', 'user', 'bengkel', 'layanans', 'detail_layanan_bookings'])
+        $bookings = Booking::with(['user', 'bengkel', 'layanans'])
             ->get();
-        return view('admin.listtransaction', ['transactions' => $transaksi]);
+        return view('admin.listbooking', ['bookings' => $bookings]);
     }
 
-    public function detailtransaksi($id)
+    public function detailbooking($id)
     {
-        $transaksi = Booking::with(['kendaraan', 'user', 'bengkel', 'layanans', 'detail_layanan_bookings'])
+        $bookings = Booking::with(['user', 'bengkel', 'layanans'])
             ->findOrFail($id);
 
         $detail = DetailLayananBooking::with(['booking', 'layanan'])->get();
 
-        // dd($transaksi);
+        return view('admin.detailbooking', ['booking' => $bookings, 'detail_booking' => $detail]);
+    }
 
-        return view('admin.detailtransaksi', ['booking' => $transaksi, 'detail_booking' => $detail]);
+    public function listtransaction()
+    {
+        $transactions = Transaction::all();
+
+        return view("admin.listtransaction", compact("transactions"));
+    }
+
+    public function detailtransaction(Transaction $transaction)
+    {
+        $details = $transaction->detail_transactions()->with('product', 'layanan', 'bengkel')->get();
+
+        return view('admin.detailtransaction', compact('transaction', 'details'));
     }
 }

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PemilikBengkel;
 use App\Models\User;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use Illuminate\Http\Request;
+use App\Models\PemilikBengkel;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
@@ -18,7 +20,14 @@ class AuthController extends Controller
 
     public function userregister()
     {
-        return view('userregister');
+        $kecamatans = Kecamatan::all();
+        return view('userregister', compact('kecamatans'));
+    }
+
+    public function getKelurahans($kecamatan_id)
+    {
+        $kelurahans = Kelurahan::where('kecamatan_id', $kecamatan_id)->get();
+        return response()->json($kelurahans);
     }
 
     public function ownerregister()
@@ -34,6 +43,8 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone_number' => ['required', 'string'],
             'alamat' => ['required', 'string', 'max:100'],
+            'kecamatan_id' => ['required'],
+            'kelurahan_id' => ['required'],
         ]);
 
         // 
@@ -43,6 +54,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'alamat' => $request->alamat,
             'phone_number' => $request->phone_number,
+            'kecamatan_id' => $request->kecamatan_id,
+            'kelurahan_id' => $request->kelurahan_id,
         ]);
 
         // 

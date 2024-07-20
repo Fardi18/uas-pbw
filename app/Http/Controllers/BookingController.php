@@ -17,38 +17,35 @@ class BookingController extends Controller
     public function booking(Request $request)
     {
         $request->validate([
-            'bengkel_id' => 'required',
             'user_id' => 'required',
-            'layanan_id' => 'required|array|min:1',
-            'kendaraan_id' => 'required',
-            'tipe_booking' => 'required',
+            'bengkel_id' => 'required',
             'waktu_booking' => 'required',
+            'brand' => 'required',
+            'model' => 'required',
+            'plat' => 'required',
+            'tahun_pembuatan' => 'required',
+            'kilometer' => 'required',
+            'transmisi' => 'required',
             'catatan_tambahan' => 'max:250',
 
         ]);
 
-        // dd($request->layanan_id);
-
         $user_id = Auth::id();
 
-        $status = BookingStatus::Pending;
-
         $booking = Booking::create([
-            'bengkel_id' => $request->bengkel_id,
             'user_id' => $user_id,
-            'kendaraan_id' => $request->kendaraan_id,
-            'tipe_booking' => $request->tipe_booking,
+            'bengkel_id' => $request->bengkel_id,
+            'waktu_booking' => $request->waktu_booking,
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'plat' => $request->plat,
+            'tahun_pembuatan' => $request->tahun_pembuatan,
+            'kilometer' => $request->kilometer,
             'waktu_booking' => $request->waktu_booking,
             'catatan_tambahan' => $request->catatan_tambahan,
-            'status' => $status
+            'status' => 'Pending'
         ]);
 
-        foreach ($request->layanan_id as $layanan_id) {
-            DetailLayananBooking::create([
-                'layanan_id' => $layanan_id,
-                'booking_id' => $booking->id
-            ]);
-        }
         return redirect('/profileuser')->with('success', 'Booking Berhasil Dibuat!');
     }
 }

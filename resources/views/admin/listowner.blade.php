@@ -32,9 +32,10 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->phone_number }}</td>
-                            <td><a href="/adminlistowner/{{ $item->id }}/delete"
+                            <td><a href="/admin-listowner/{{ $item->id }}/delete"
                                     class="btn btn-danger text-white">Hapus</a>
-                                <a href="/detailowner/{{ $item->id }}" class="btn btn-warning text-white">Detail</a>
+                                <a href="/admin-detailowner/{{ $item->id }}"
+                                    class="btn btn-warning text-white">Detail</a>
                             </td>
                         </tr>
                     @endforeach

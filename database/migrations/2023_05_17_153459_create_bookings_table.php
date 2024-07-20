@@ -15,16 +15,19 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('waktu_booking');
-            $table->longText('catatan_tambahan')->nullable(true);
-            $table->string('status');
-            $table->string('tipe_booking');
-            $table->foreignId('kendaraan_id');
-            $table->foreign('kendaraan_id')->references('id')->on('kendaraans')->onDelete('cascade');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('bengkel_id');
             $table->foreign('bengkel_id')->references('id')->on('bengkels')->onDelete('cascade');
+            $table->dateTime('waktu_booking');
+            $table->string('brand');
+            $table->string('model');
+            $table->string('plat');
+            $table->string('tahun_pembuatan');
+            $table->integer('kilometer');
+            $table->enum('transmisi', array('Manual', 'Matic'));
+            $table->enum('booking_status', array('Pending', 'Diterima', 'Ditolak', 'Selesai'));
+            $table->longText('catatan_tambahan')->nullable();
             $table->timestamps();
         });
     }

@@ -15,7 +15,8 @@
                         <h1>{{ $bengkel->name }}</h1>
                         <div class="desc-bengkel-lokasi d-flex align-items-center">
                             <img src="{{ asset('css/icon-location.png') }}" alt="">
-                            <h5>{{ $bengkel->alamat }}</h5>
+                            <h5>{{ $bengkel->alamat }}, {{ $bengkel->kecamatan->name }}, {{ $bengkel->kelurahan->name }}
+                            </h5>
                         </div>
                         <p>{{ $bengkel->description }}</p>
                     </div>
@@ -23,10 +24,10 @@
                 <div class="row my-5 informasi-tambahan">
                     <div class="detail-bengkel-informasi-tambahan d-flex align-items-center">
                         <img src="{{ asset('css/icon-informasi.png') }}" alt="">
-                        <h5>Informasi Tambahan</h5>
+                        <h3 class="mb-0 mx-4">Informasi Tambahan</h3>
                     </div>
-                    <div class="col-lg-3 my-3">
-                        <h6>Daftar Service</h6>
+                    <div class="col">
+                        <h5>Daftar Service</h5>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -38,15 +39,50 @@
                                 @foreach ($bengkel->layanans as $layanan)
                                     <tr>
                                         <td>{{ $layanan->name }}</td>
-                                        <td>{{ $layanan->price }}</td>
+                                        <td>Rp{{ number_format($layanan->price) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="col-lg-9 my-3">
-                        <h6>Jadwal Operasional</h6>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5>Daftar Produk</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nama Produk</th>
+                                    <th scope="col">Gambar Produk</th>
+                                    <th scope="col">Harga Produk</th>
+                                    <th scope="col">Stok Produk</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($bengkel->products as $product)
+                                    <tr>
+                                        <td>{{ $product->name }}</td>
+                                        <td>
+                                            <img src="{{ asset('images/' . $product->image) }}" alt=""
+                                                style="width: 100px; height:auto">
+                                        </td>
+                                        <td>Rp{{ number_format($product->price) }}</td>
+                                        <td>{{ $product->stock }}</td>
+                                        <td>
+                                            <a href="/detailproductpage/{{ $product->id }}"
+                                                class="btn btn-primary w-100">Lihat
+                                                Product</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5>Jadwal Operasional</h5>
                         <table class="table">
                             <thead>
                                 <tr>

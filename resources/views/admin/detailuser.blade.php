@@ -41,31 +41,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div>
-                    <h5 class="fw-bold">Data Kendaraan User</h5>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Merk</th>
-                                <th scope="col">Model</th>
-                                <th scope="col">Plat</th>
-                                <th scope="col">Category</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($kendaraans as $kendaraan)
-                                <tr>
-                                    @if ($user->id == $kendaraan->user->id)
-                                        <td>{{ $kendaraan->merk }}</td>
-                                        <td>{{ $kendaraan->model }}</td>
-                                        <td>{{ $kendaraan->plat }}</td>
-                                        <td>{{ $kendaraan->category_kendaraan->name }}</td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
             @endforeach
         </div>
         <!-- /.card-body -->

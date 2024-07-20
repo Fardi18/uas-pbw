@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Bengkel;
 use App\Models\Booking;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
+use Illuminate\Http\Request;
 use App\Models\PemilikBengkel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BengkelController extends Controller
 {
@@ -21,8 +23,15 @@ class BengkelController extends Controller
 
     public function create()
     {
-        $data['owners'] = PemilikBengkel::orderBy('name', 'ASC')->get();
-        return view('mitra.bengkel.add', $data);
+        $data = PemilikBengkel::orderBy('name', 'ASC')->get();
+        $kecamatans = Kecamatan::all();
+        return view('mitra.bengkel.add', ['data' => $data, 'kecamatans' => $kecamatans]);
+    }
+
+    public function getKelurahans($kecamatan_id)
+    {
+        $kelurahans = Kelurahan::where('kecamatan_id', $kecamatan_id)->get();
+        return response()->json($kelurahans);
     }
 
     public function store(Request $request)
@@ -41,6 +50,8 @@ class BengkelController extends Controller
         $bengkels->link_alamat = $request->link_bengkel_address;
         $bengkels->image = $imageName;
         $bengkels->pemilik_id = $owner_id;
+        $bengkels->kecamatan_id = $request->kecamatan_id;
+        $bengkels->kelurahan_id = $request->kelurahan_id;
 
         $bengkels->save();
 
@@ -49,9 +60,10 @@ class BengkelController extends Controller
 
     public function edit($id)
     {
-        $data['bengkel'] = Bengkel::findOrFail($id);
+        $bengkel = Bengkel::findOrFail($id);
+        $kecamatans = Kecamatan::all();
         $item['owner'] = PemilikBengkel::orderBy('name', 'ASC')->get();
-        return view('mitra.bengkel.edit', $data, $item);
+        return view('mitra.bengkel.edit', ['bengkel' => $bengkel, 'kecamatans' => $kecamatans]);
     }
 
     public function update(Request $request, $id)
@@ -72,6 +84,8 @@ class BengkelController extends Controller
         $bengkel->alamat = $request->bengkel_address;
         $bengkel->link_alamat = $request->link_bengkel_address;
         $bengkel->pemilik_id = $owner_id;
+        $bengkel->kecamatan_id = $request->kecamatan_id;
+        $bengkel->kelurahan_id = $request->kelurahan_id;
         $bengkel->save();
 
         return redirect('owner/bengkel')->with('success', 'Bengkel berhasil diperbarui');

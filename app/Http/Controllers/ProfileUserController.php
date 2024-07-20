@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\CategoryKendaraan;
 use App\Models\DetailLayananBooking;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\Kendaraan;
 use App\Models\Layanan;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,37 +19,38 @@ class ProfileUserController extends Controller
 {
     public function showuser(Request $request)
     {
-        $datauser = User::get();
-        return view('user/profileuser', ['users' => $datauser]);
+        $dataUser = User::with('kecamatan', 'kelurahan')->get();
+        return view('user/profileuser', ['users' => $dataUser]);
     }
 
     public function showdetailuser($id)
     {
-        $datauser = User::findOrFail($id);
-        return view('user/profileuserdetail', ['users' => $datauser]);
+        $dataUser = User::with('kecamatan', 'kelurahan')->findOrFail($id);
+        return view('user/profileuserdetail',  ['users' => $dataUser]);
     }
 
     public function edit($id)
     {
-        $data['users'] = User::findOrFail($id);
+        $kecamatans = Kecamatan::all();
+        $kelurahans = Kelurahan::all();
+        $dataUser = User::with('kecamatan', 'kelurahan')->findOrFail($id);
 
         return view(
             'user/profileuseredit',
-            $data
+            ['users' => $dataUser, 'kecamatans' => $kecamatans, 'kelurahans' => $kelurahans]
         );
     }
 
     public function updatedetailuser(Request $request, $id)
     {
         // mendapatkan data user
-        $dataUser['users'] = User::findOrFail($id);
+        $dataUser = User::with('kecamatan', 'kelurahan')->findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'string',
             'email' => 'string',
             'phone_number' => 'string',
             'alamat' => 'string',
-            // 'image' => 'required|mimes:jpg,jpeg,png|max:5120'
         ]);
 
 
@@ -56,113 +60,45 @@ class ProfileUserController extends Controller
             'email' => $validated['email'],
             'phone_number' => $validated['phone_number'],
             'alamat' => $validated['alamat'],
-            // 'image' => $newImage['image']
+            'kecamatan_id' => $request->kecamatan_id,
+            'kelurahan_id' => $request->kelurahan_id,
         ]);
 
         return redirect('/profileuser')->with('success', 'Profile Berhasil Diubah!');
     }
 
-    public function showkendaraan()
-    {
-        $user = Auth::user();
-        $idUser = $user->id;
-        //menampilkan data product
-        $datakendaraan = Kendaraan::with(['category_kendaraan', 'user'])
-            ->where('user_id', $idUser)
-            ->orderBy('id', 'desc')
-            ->paginate(4);
-
-        return view('user/profilekendaraan', ['kendaraans' => $datakendaraan]);
-    }
-
-    public function createkendaraan(Request $request)
-    {
-        // ambil data category
-        $data['category_kendaraan'] = CategoryKendaraan::all();
-
-        //create data (add)
-        return view(
-            'user/addkendaraan',
-            $data
-        );
-    }
-
-    public function storekendaraan(Request $request)
-    {
-        // validasi form
-        $validated = $request->validate([
-            'merk' => 'required',
-            'model' => 'required',
-            'category_kendaraan_id' => 'required',
-            'plat' => 'required',
-        ]);
-
-        //menambahkan data ke database
-        Kendaraan::create([
-            'merk' => $validated['merk'],
-            'model' => $validated['model'],
-            'category_kendaraan_id' => $validated['category_kendaraan_id'],
-            'plat' => $validated['plat'],
-            'user_id' => Auth::user()->id
-        ]);
-
-        return redirect('/profilekendaraan')->with('success', 'Kendaraan Berhasil Ditambahkan!');
-    }
-
-    public function editkendaraan($id)
-    {
-        $data['category_kendaraan'] = CategoryKendaraan::all();
-        $data['kendaraans'] = Kendaraan::find($id);
-
-        //create data (add)
-        return view(
-            'user/editkendaraan',
-            $data
-        );
-    }
-
-    public function updatekendaraan(Request $request, $id)
-    {
-        // mendapatkan data product
-        $dataKendaraan = Kendaraan::findOrFail($id);
-
-        $validated = $request->validate([
-            'merk' => 'required',
-            'model' => 'required',
-            'category_kendaraan_id' => 'required',
-            'plat' => 'required'
-        ]);
-
-        // update data pada database berdasarkan id
-        Kendaraan::where('id', $id)->update([
-            'merk' => $validated['merk'],
-            'model' => $validated['model'],
-            'category_kendaraan_id' => $validated['category_kendaraan_id'],
-            'plat' => $validated['plat'],
-        ]);
-
-        return redirect('/profilekendaraan')->with('success', 'Kendaraan Berhasil Diedit!');
-    }
-
-    public function destroykendaraan($id)
-    {
-        Kendaraan::destroy($id);
-
-        return redirect('/profilekendaraan')->with('success', 'Kendaraan Berhasil Dihapus!');
-    }
-
-    public function showtransaksi()
+    public function bookingList()
     {
         $user = Auth::user();
         $idUser = $user->id;
 
-        $booking = Booking::with(['kendaraan', 'user', 'bengkel'])
+        $bookings = Booking::with(['user', 'bengkel'])
             ->where('user_id', $idUser)->orderBy('id', 'desc')->paginate(4);
 
-        $detail_booking = DetailLayananBooking::with(['booking', 'layanan'])->get();
-        // dd($detail_booking);
+        return view('user.profilebooking', ['user' => $user, 'bookings' => $bookings]);
+    }
 
-        // dd($booking);
-        return view('user/profiletransaksi', ['user' => $user, 'transaksi' => $booking, 'detail_booking' => $detail_booking]);
+    public function showBooking($id)
+    {
+        $booking = Booking::with('bengkel', 'user')->findOrFail($id);
+        return view('user.detailbooking', compact('booking'));
+    }
+
+    public function transactionList()
+    {
+        $user = Auth::user();
+        $idUser = $user->id;
+
+        $transactions = Transaction::with(['user', 'bengkel'])
+            ->where('user_id', $idUser)->get();
+
+        return view('user.profiletransaksi', ['user' => $user, 'transactions' => $transactions]);
+    }
+
+    public function showTransaction(Transaction $transaction)
+    {
+        $details = $transaction->detail_transactions()->with('product', 'layanan', 'bengkel')->get();
+
+        return view('user.detailtransaction', compact('transaction', 'details'));
     }
 }

@@ -39,7 +39,6 @@
                                 <th>Gambar</th>
                                 <th>Nama Bengkel</th>
                                 <th>Alamat</th>
-                                <th>Link Maps</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -54,7 +53,6 @@
                                     </td>
                                     <td>{{ $bengkel->name }}</td>
                                     <td>{{ $bengkel->alamat }}</td>
-                                    <td>{{ $bengkel->link_alamat }}</td>
                                     <td>
                                         <a href="/owner/bengkel/{{ $bengkel->id }}/edit" type="button"
                                             class="btn btn-sm btn-warning">Edit</a>

@@ -1,51 +1,74 @@
 @extends('admin.layouts.app')
 
-@section('title', 'List Transaction')
+@section('title', 'List Transaksi')
+
+@section('header')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">TrList ansaction</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/owner">Home</a></li>
+                        <li class="breadcrumb-item active">TrList ansaction</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+@endsection
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Transaction List</h3>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Daftar Transaksi</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Nama Pelanggan</th>
+                                                <th>Status Pembayaran</th>
+                                                <th>Total Harga</th>
+                                                <th>Action</th>
 
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                </button>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($transactions as $transaction)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $transaction->user->name }}</td>
+                                                    <td>{{ $transaction->payment_status }}</td>
+                                                    <td>Rp{{ number_format($transaction->grand_total - ($transaction->ongkir + $transaction->administrasi)) }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('admin.show.transaction', $transaction) }}"
+                                                            class="btn btn-sm btn-warning">Detail
+                                                            Transaksi</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Waktu</th>
-                        <th>Tipe Booking</th>
-                        <th>Status</th>
-                        <th>Kendaraan</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($transactions as $item)
-                        <tr class="align-items-center">
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->user->name }}</td>
-                            <td>{{ $item->waktu_booking }}</td>
-                            <td>{{ $item->tipe_booking }}</td>
-                            <td>{{ $item->status }}</td>
-                            <td>{{ $item->kendaraan->model }}</td>
-                            <td>
-                                <a href="/detailtransaksi/{{ $item->id }}" class="btn btn-warning text-white">Detail</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <!-- /.card-body -->
     </div>
 @endsection

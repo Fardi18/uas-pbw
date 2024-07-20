@@ -46,6 +46,21 @@
                                 placeholder="Deskripsi bengkel">{{ $bengkel->description }}</textarea>
                         </div>
                         <div class="form-group">
+                            <label>Kecamatan</label>
+                            <select class="custom-select" name="kecamatan_id" id="kecamatan_id">
+                                <option>-- Pilih Kecamatan --</option>
+                                @foreach ($kecamatans as $kecamatan)
+                                    <option value="{{ $kecamatan->id }}">{{ $kecamatan->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Kelurahan</label>
+                            <select class="custom-select" name="kelurahan_id" id="kelurahan_id">
+                                <option selected>-- Pilih Kelurahan --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="bengkel_address">Alamat Bengkel</label>
                             <input type="text" class="form-control" id="bengkel_address" name="bengkel_address"
                                 placeholder="Alamat bengkel" value="{{ $bengkel->alamat }}">
@@ -77,3 +92,30 @@
         </div>
     </div>
 @endsection
+@push('javascript')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#kecamatan_id').change(function() {
+                var kecamatan_id = $(this).val();
+                $.ajax({
+                    url: '/owner/get-kelurahan/' + kecamatan_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#kelurahan_id').empty();
+                        $('#kelurahan_id').append(
+                            '<option selected>-- Pilih Kelurahan --</option>');
+                        $.each(data, function(key, value) {
+                            $('#kelurahan_id').append('<option value="' + value.id +
+                                '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
