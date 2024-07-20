@@ -101,7 +101,7 @@ class AuthController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('adminindex');
+            return redirect('/admin-index');
         }
 
         if (Auth::guard('owner')->attempt($credentials)) {

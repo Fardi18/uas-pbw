@@ -46,13 +46,12 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        <h5>Informasi Tambahan</h5>
+                        <h5>Informasi User</h5>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">Nama User</th>
                                     <th scope="col">Alamat User</th>
-                                    <th scope="col">Catatan Tambahan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,9 +62,41 @@
                                     <td>
                                         <p>{{ $booking->user->alamat }}</p>
                                     </td>
-                                    <td>
-                                        <p>{{ $booking->catatan_tambahan }}</p>
-                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                        <h5>Informasi Kendaraan</h5>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>Brand</th>
+                                    <th>{{ $booking->brand }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>{{ $booking->model }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Tahun Pembutan</th>
+                                    <th>{{ $booking->tahun_pembuatan }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Kilometer (km)</th>
+                                    <th>{{ $booking->kilometer }}</th>
+                                </tr>
+                                <tr>
+                                    <th>No. Polisi</th>
+                                    <th>{{ $booking->plat }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Transmisi</th>
+                                    <th>{{ $booking->transmisi }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Catatan Pembuatan</th>
+                                    <th>{{ $booking->catatan_tambahan }}</th>
                                 </tr>
                             </tbody>
                         </table>
