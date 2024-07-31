@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\BengkelBookingController;
 use App\Http\Controllers\BengkelTransactionController;
+use App\Http\Controllers\ChatbotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,3 +142,7 @@ Route::prefix('/owner')->middleware('auth:owner')->group(function () {
     Route::delete('/transaction/cart/{id}', [BengkelTransactionController::class, 'removeFromCart'])->name('remove.from.cart');
     Route::post('/checkout/process/owner', [BengkelTransactionController::class, 'checkoutProcessForOwner'])->name('checkout.process.owner');
 });
+
+
+
+Route::match(['get', 'post'], '/botman', [ChatbotController::class, 'handle']);

@@ -24,6 +24,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Boostrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    {{-- <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> --}}
 
     <title>Bengkelin | @yield('title')</title>
 
@@ -45,5 +47,7 @@
     @stack('javascript')
 
 </body>
+
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
 
 </html>
