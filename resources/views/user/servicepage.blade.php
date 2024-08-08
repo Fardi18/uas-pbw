@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- hero --}}
-    <div class="hero d-flex align-items-center">
+    {{-- <div class="hero d-flex align-items-center">
         <div class="container-fluid">
             <div class="row">
                 <div class="col text-center">
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- service --}}
     <div class="service">
@@ -60,7 +60,8 @@
                                     <img src="{{ asset('css/icon-location.png') }}">
                                     <p>{{ $bengkel->alamat }}</p>
                                 </div>
-                                <a href="/detailbengkelpage/{{ $bengkel->id }}" class="btn btn-primary">Lihat Bengkel</a>
+                                <a href="/detailbengkelpage/{{ $bengkel->id }}" class="btn btn-primary w-100">Lihat
+                                    Bengkel</a>
                             </div>
                         </div>
                     </div>

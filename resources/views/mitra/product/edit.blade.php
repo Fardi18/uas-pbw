@@ -46,12 +46,17 @@
                         </div>
                         <div class="form-group">
                             <label for="price">Harga Produk</label>
-                            <input type="text" class="form-control" id="price" name="price"
+                            <input type="number" class="form-control" id="price" name="price"
                                 placeholder="Harga product" value="{{ $product->price }}">
                         </div>
                         <div class="form-group">
+                            <label for="price">Berat Produk (kg)</label>
+                            <input type="number" class="form-control" id="weight" name="weight"
+                                placeholder="Berat product" value="{{ $product->weight }}">
+                        </div>
+                        <div class="form-group">
                             <label for="price">Stok Produk</label>
-                            <input type="text" class="form-control" id="stock" name="stock"
+                            <input type="number" class="form-control" id="stock" name="stock"
                                 placeholder="Stock product" value="{{ $product->stock }}">
                         </div>
                         <div class="form-group">

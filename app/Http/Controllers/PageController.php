@@ -17,7 +17,7 @@ class PageController extends Controller
 
     public function detailProduct($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('bengkel')->findOrFail($id);
         return view('user.detailproductpage', ['product' => $product]);
     }
 }

@@ -49,6 +49,11 @@
                                 placeholder="Harga produk">
                         </div>
                         <div class="form-group">
+                            <label for="price">Berat Produk (kg)</label>
+                            <input type="number" class="form-control" id="weight" name="weight"
+                                placeholder="Berat produk">
+                        </div>
+                        <div class="form-group">
                             <label for="price">Stok Produk</label>
                             <input type="number" class="form-control" id="stock" name="stock"
                                 placeholder="Stok produk">

@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- hero --}}
-    <div class="hero d-flex align-items-center">
+    {{-- <div class="hero d-flex align-items-center">
         <div class="container-fluid">
             <div class="row">
                 <div class="col text-center">
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- service --}}
     <div class="service">
@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h5 class="card-title">{{ $product->name }}</h5>
-                                    <h6>Rp{{ $product->price }}</h6>
+                                    <h6>Rp{{ number_format($product->price) }}</h6>
                                 </div>
                                 <p class="text-secondary">Stock: {{ $product->stock }}</p>
                                 <a href="/detailproductpage/{{ $product->id }}" class="btn btn-primary w-100">Lihat

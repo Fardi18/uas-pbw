@@ -13,9 +13,13 @@
                 <div class="col-lg-6">
                     <h1>{{ $product->name }}</h1>
                     <div class="d-flex align-items-center justify-content-between my-3">
-                        <h5>Stock: {{ $product->stock }}</h5>
-                        <h3>Rp{{ number_format($product->price) }}</h3>
+                        <div>
+                            <h5>Stock: {{ $product->stock }}</h5>
+                            <h5>Berat: {{ $product->weight }}kg</h5>
+                        </div>
+                        <h2>Rp{{ number_format($product->price) }}</h2>
                     </div>
+
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

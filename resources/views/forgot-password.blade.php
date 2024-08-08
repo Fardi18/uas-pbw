@@ -10,7 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Bengkelin | Login</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+        integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Bengkelin | Lupa Password</title>
 
     <style>
         .login-box {
@@ -27,10 +32,24 @@
     <div class="vh-100 p-5 d-flex justify-content-center align-items-center">
         <div class="login-box p-5">
             <div class="title mb-3">
-                <h3 class="text-center">Welcome Back to <span class="text-primary">Bengkelin</span></h3>
-                <p class="text-secondary text-center">Please enter your data</p>
+                <h3 class="text-center">Lupa Password?</h3>
+                <p class="text-secondary text-center">Jangan khawatir, masukkan emailmu untuk perbarui password</p>
             </div>
-            <form method="POST" action="{{ route('login') }}">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session()->has('status'))
+                <div class="alert alert-success">
+                    {{ session()->get('status') }}
+                </div>
+            @endif
+            <form method="POST" action="{{ route('password.email') }}">
                 @csrf
                 <div class="mb-3 form">
                     <label for="email" class="form-label">Email</label>
@@ -40,26 +59,11 @@
                         <div id="emailHelp" class="form-text">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3 form">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" id="password"
-                        class="form-control @error('password') is-invalid @enderror" required>
-                    @error('password')
-                        <div id="passwordHelp" class="form-text">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3 mt-5 ">
-                    <button class="btn btn-primary w-100" type="submit" style="border-radius: 20px;">Login</button>
-                    <p class="mt-3 text-center"><a href="{{ route('password.request') }}"><b>Lupa password?</b></a></p>
-                    <p class="mt-3 text-center">Belum punya akun?</p>
-                    <a href="{{ route('userregister') }}" class="btn btn-md btn-primary w-100 mb-2 mt-2"
-                        style="border-radius: 20px;">Daftar
-                        Sebagai
-                        User</a>
-                    <a href="{{ route('ownerregister') }}" class="btn btn-md btn-primary w-100"
-                        style="border-radius: 20px">Daftar Sebagai
-                        Mitra</a>
-                </div>
+                <button class="btn btn-primary w-100 mt-3" type="submit" style="border-radius: 20px;">Kirim
+                    Link</button>
+                <p class="mt-3 text-center back fw-semibold">
+                    <a href="{{ route('login') }}">Kembali ke Login</a>
+                </p>
             </form>
         </div>
     </div>

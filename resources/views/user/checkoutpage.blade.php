@@ -71,9 +71,9 @@
                                         @endphp
                                         @php
                                             if ($cart->bengkel->kecamatan_id == $user->kecamatan->id) {
-                                                $ongkir = 10000;
-                                            } else {
                                                 $ongkir = 15000;
+                                            } else {
+                                                $ongkir = 25000;
                                             }
                                         @endphp
                                         @php
