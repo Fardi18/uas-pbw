@@ -11,7 +11,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link href="{{ asset('/user-tamplate') }}/css/style.css" rel="stylesheet">
-    <title>Repair X Shop | Login</title>
+    <title>CARS | Login</title>
 
     <style>
         body {
@@ -32,7 +32,7 @@
     <div class="vh-100 p-5 d-flex justify-content-center align-items-center">
         <div class="login-box p-5">
             <div class="title mb-3">
-                <h3 class="text-center">Welcome Back to <span class="text-primary">Repair X Shop</span></h3>
+                <h3 class="text-center">Welcome Back to <span class="text-primary">CARS</span></h3>
                 <p class="text-secondary text-center">Masukkan email dan passwordmu</p>
             </div>
             <form method="POST" action="{{ route('login') }}">

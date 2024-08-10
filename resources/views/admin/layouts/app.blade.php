@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Repair x Shop | Admin Side</title>
+    <title>CARS | Admin Side</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

@@ -42,6 +42,7 @@
                                                     <th>No.</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Nama Bengkel</th>
+                                                    <th>Tanggal</th>
                                                     <th>Waktu</th>
                                                     <th>Status</th>
                                                     <th>Kendaraan</th>
@@ -55,6 +56,7 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $booking->user->name }}</td>
                                                         <td>{{ $booking->bengkel->name }}</td>
+                                                        <td>{{ $booking->tanggal_booking }}</td>
                                                         <td>{{ $booking->waktu_booking }}</td>
                                                         <td>{{ $booking->booking_status }}</td>
                                                         <td>{{ $booking->brand }} {{ $booking->model }}</td>

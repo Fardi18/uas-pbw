@@ -9,8 +9,8 @@
             <div class="row justify-content-between">
                 <div class="col-lg-6">
                     <div class="intro-excerpt">
-                        <h1>Welcome to <br>Repair X Shop</h1>
-                        <p class="mb-4">Repair X Shop adalah sebuah website yang menyediakan layanan berupa Booking
+                        <h1>Welcome to <br>CARS</h1>
+                        <p class="mb-4">CARS adalah sebuah website yang menyediakan layanan berupa Booking
                             Bengkel secara online sehingga Kamu dan Bengkel dapat terhubung dengan cepat. Pada website ini
                             juga tersedia jual beli sparepart untuk kebutuhan kendaraan kamu.</p>
                         <p><a href="/servicepage" class="btn btn-secondary me-2">Get Started</a></p>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-img-wrap">
-                        <img src="{{ asset('/user-tamplate/images/sofa.png') }}" class="img-fluid">
+                        {{-- <img src="{{ asset('/user-tamplate/images/sofa.png') }}" class="img-fluid"> --}}
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
                     <h2 class="mb-4">Dapatkan Kebutuhan Kendaraanmu</h2>
-                    <p class="mb-4">Di Repair X Shop kamu juga bisa membeli kebutuhan kendaraan mu, semuanya ada di Repair
+                    <p class="mb-4">Di CARS kamu juga bisa membeli kebutuhan kendaraan mu, semuanya ada di Repair
                         X Shop</p>
                     <p><a href="/productpage" class="btn">Explore</a></p>
                 </div>
@@ -70,7 +70,7 @@
                                         class="imf-fluid">
                                 </div>
                                 <h3>Connected</h3>
-                                <p>Repair X Shop membantu kamu untuk terhubung dengan bengkel sehingga akan lebih mudah jika
+                                <p>CARS membantu kamu untuk terhubung dengan bengkel sehingga akan lebih mudah jika
                                     terjadi kerusakan pada Kendaraan yang kamu miliki</p>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                                 </div>
                                 <h3>Easy to Shop</h3>
                                 <p>Belinya pake handphone bayarnya juga pakai handphone. Dapatkan kemudahan tersebut di
-                                    Repair X Shop</p>
+                                    CARS</p>
                             </div>
                         </div>
 
@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-lg-5 ps-lg-5">
                     <h2 class="section-title mb-4">We Help You Make with a Modern Ways</h2>
-                    <p>Aplikasi Repair X Shop ini memiliki chatbot yang bernama ReshopBot yang akan membantu kamu untuk
+                    <p>Aplikasi CARS ini memiliki chatbot yang bernama ReshopBot yang akan membantu kamu untuk
                         lebih mengeksplorasi
                         fitur-fitur dan mendapatkan informasi yang kamu butuhkan. ReshopBot ini bisa kamu gunakan untuk
                         mendapatkan: </p>

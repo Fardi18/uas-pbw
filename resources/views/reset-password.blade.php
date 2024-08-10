@@ -11,7 +11,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link href="{{ asset('/user-tamplate') }}/css/style.css" rel="stylesheet">
-    <title>Repair X Shop | Reset Password</title>
+    <title>CARS | Reset Password</title>
 
     <style>
         body {
@@ -21,7 +21,7 @@
         .login-box {
             /* border: solid 1px gray; */
             /* box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; */
-            /* width: 500px; */
+            width: 500px;
             background-color: white;
             /* border-radius: 32px */
         }

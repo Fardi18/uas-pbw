@@ -8,10 +8,10 @@
             <div class="col-lg-8">
                 <div class="mb-4 footer-logo-wrap">
                     <a href="/" class="footer-logo">
-                        <img src="{{ asset('css/logo.png') }}" alt="" style="width: 100px">
+                        <img src="{{ asset('css/logo.png') }}" alt="" style="width: 100px; border-radius: 60px">
                     </a>
                 </div>
-                <p class="mb-4">Repair X Shop adalah sebuah website yang menyediakan layanan berupa Booking
+                <p class="mb-4">CARS adalah sebuah website yang menyediakan layanan berupa Booking
                     Bengkel secara online sehingga Kamu dan Bengkel dapat terhubung dengan cepat. Pada website ini juga
                     tersedia jual beli sparepart untuk kebutuhan kendaraan kamu.</p>
 
@@ -61,7 +61,7 @@
             <div class="row pt-4">
                 <div class="col-lg-6">
                     <ul class="list-unstyled d-inline-flex ms-auto">
-                        <li class="me-4"><a href="#">REPAIR X SHOP</a></li>
+                        <li class="me-4"><a href="#">CARS</a></li>
                     </ul>
                 </div>
 

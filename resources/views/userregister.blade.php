@@ -11,7 +11,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link href="{{ asset('/user-tamplate') }}/css/style.css" rel="stylesheet">
-    <title>Repair X Shop | Register</title>
+    <title>CARS | Register</title>
 
     <style>
         body {

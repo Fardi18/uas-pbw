@@ -31,7 +31,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/owner/bengkel/{{ $bengkel->id }}" method="POST" enctype="multipart/form-data">
+                {{-- <form action="/owner/bengkel/{{ $bengkel->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="card-body">
@@ -41,8 +41,22 @@
                                 placeholder="Nama bengkel" value="{{ $bengkel->name }}">
                         </div>
                         <div class="form-group">
+                            <label>Spesialis Bengkel</label>
+                            <div class="row">
+                                @foreach ($specialists as $specialist)
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="specialist_ids[]"
+                                                value="{{ $specialist->id }}">
+                                            <label class="form-check-label">{{ $specialist->name }}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Deskripsi Bengkel</label>
-                            <textarea type="text" class="form-control" id="bengkel_description" name="bengkel_description"
+                            <textarea rows="5" type="text" class="form-control" id="bengkel_description" name="bengkel_description"
                                 placeholder="Deskripsi bengkel">{{ $bengkel->description }}</textarea>
                         </div>
                         <div class="form-group">
@@ -62,13 +76,8 @@
                         </div>
                         <div class="form-group">
                             <label for="bengkel_address">Alamat Bengkel</label>
-                            <input type="text" class="form-control" id="bengkel_address" name="bengkel_address"
-                                placeholder="Alamat bengkel" value="{{ $bengkel->alamat }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="link_bengkel_address">Link Maps Bengkel</label>
-                            <input type="text" class="form-control" id="link_bengkel_address" name="link_bengkel_address"
-                                placeholder="Link maps bengkel" value="{{ $bengkel->link_alamat }}">
+                            <textarea rows="10" type="text" class="form-control" id="bengkel_address" name="bengkel_address"
+                                placeholder="Alamat bengkel">{{ $bengkel->alamat }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="image">Gambar Bengkel</label>
@@ -86,7 +95,86 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                </form> --}}
+                <form action="/owner/bengkel/{{ $bengkel->id }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('put')
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="bengkel_name">Nama Bengkel</label>
+                            <input type="text" class="form-control" id="bengkel_name" name="bengkel_name"
+                                placeholder="Nama bengkel" value="{{ old('bengkel_name', $bengkel->name) }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Spesialis Bengkel</label>
+                            <div class="row">
+                                @foreach ($specialists as $specialist)
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="specialist_ids[]"
+                                                value="{{ $specialist->id }}"
+                                                {{ in_array($specialist->id, $bengkel->specialists->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                            <label class="form-check-label">{{ $specialist->name }}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Deskripsi Bengkel</label>
+                            <textarea rows="5" type="text" class="form-control" id="bengkel_description" name="bengkel_description"
+                                placeholder="Deskripsi bengkel">{{ old('bengkel_description', $bengkel->description) }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Kecamatan</label>
+                            <select class="custom-select" name="kecamatan_id" id="kecamatan_id">
+                                <option>-- Pilih Kecamatan --</option>
+                                @foreach ($kecamatans as $kecamatan)
+                                    <option value="{{ $kecamatan->id }}"
+                                        {{ $bengkel->kecamatan_id == $kecamatan->id ? 'selected' : '' }}>
+                                        {{ $kecamatan->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Kelurahan</label>
+                            <select class="custom-select" name="kelurahan_id" id="kelurahan_id">
+                                <option selected>-- Pilih Kelurahan --</option>
+                                @foreach ($kelurahans as $kelurahan)
+                                    <option value="{{ $kelurahan->id }}"
+                                        {{ $bengkel->kelurahan_id == $kelurahan->id ? 'selected' : '' }}>
+                                        {{ $kelurahan->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bengkel_address">Alamat Bengkel</label>
+                            <textarea rows="10" type="text" class="form-control" id="bengkel_address" name="bengkel_address"
+                                placeholder="Alamat bengkel">{{ old('bengkel_address', $bengkel->alamat) }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Gambar Bengkel</label>
+                            @if ($bengkel->image)
+                                <div class="mt-3">
+                                    <img src="{{ asset('images/' . $bengkel->image) }}" alt="Gambar Bengkel" width="400px"
+                                        class="mb-5">
+                                </div>
+                            @endif
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <label class="custom-file-label" for="image">Cari Foto</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </form>
+
             </div>
             <!-- /.card -->
         </div>

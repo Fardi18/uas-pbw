@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <section class="search">
+    {{-- <section class="search">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
@@ -37,6 +37,45 @@
                             <option selected>-- Pilih Kelurahan --</option>
                         </select>
                     </div>
+                    <select class="form-select" id="specialist" name="specialist_id" aria-label="Default select example">
+                        <option selected>-- Pilih Spesialis --</option>
+                        @foreach ($specialists as $specialist)
+                            <option value="{{ $specialist->id }}">{{ $specialist->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+    <section class="search">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col col-lg-8">
+                    <form id="filter-form" action="" method="GET">
+                        @csrf
+                        <input type="text" class="form-control" placeholder="Cari bengkel disini" name="keyword">
+                        <input type="hidden" id="kecamatan-id" name="kecamatan_id">
+                        <input type="hidden" id="kelurahan-id" name="kelurahan_id">
+                        <input type="hidden" id="specialist-id" name="specialist_id">
+                    </form>
+                    <div class="d-flex align-items-center justify-content-between my-3">
+                        <select class="form-select" id="kecamatan" aria-label="Default select example">
+                            <option selected>-- Pilih Kecamatan --</option>
+                            @foreach ($kecamatans as $kecamatan)
+                                <option value="{{ $kecamatan->id }}">{{ $kecamatan->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="mx-1"></div>
+                        <select class="form-select" id="kelurahan" aria-label="Default select example">
+                            <option selected>-- Pilih Kelurahan --</option>
+                        </select>
+                    </div>
+                    <select class="form-select" id="specialist" aria-label="Default select example">
+                        <option selected>-- Pilih Spesialis --</option>
+                        @foreach ($specialists as $specialist)
+                            <option value="{{ $specialist->id }}">{{ $specialist->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
@@ -86,6 +125,12 @@
         document.getElementById('kelurahan').addEventListener('change', function() {
             var kelurahanId = this.value;
             document.getElementById('kelurahan-id').value = kelurahanId;
+            document.getElementById('filter-form').submit();
+        });
+
+        document.getElementById('specialist').addEventListener('change', function() {
+            var specialistId = this.value;
+            document.getElementById('specialist-id').value = specialistId;
             document.getElementById('filter-form').submit();
         });
     </script>

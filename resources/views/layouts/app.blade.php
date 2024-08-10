@@ -73,7 +73,7 @@
     <link href="{{ asset('/user-tamplate') }}/css/style.css" rel="stylesheet">
     <!-- CSS Custom -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <title>Repair X Shop | @yield('title')</title>
+    <title>CARS | @yield('title')</title>
     <title></title>
 </head>
 

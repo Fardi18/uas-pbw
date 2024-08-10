@@ -4,7 +4,7 @@
     <a href="{{ route('adminindex') }}"class="brand-link">
         <img src="{{ asset('css/logo.png') }}" alt="Logo RXS" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">Repair X Shop</span>
+        <span class="brand-text font-weight-light">CARS</span>
     </a>
 
     <!-- Sidebar -->

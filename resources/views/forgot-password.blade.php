@@ -17,7 +17,7 @@
 
     <link href="{{ asset('/user-tamplate') }}/css/style.css" rel="stylesheet">
 
-    <title>Repair X Shop | Lupa Password</title>
+    <title>CARS | Lupa Password</title>
 
     <style>
         body {
