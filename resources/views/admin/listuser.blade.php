@@ -34,10 +34,16 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->phone_number }}</td>
                             <td>{{ $item->alamat }}</td>
-                            <td><a href="/admin-listuser/{{ $item->id }}/delete"
-                                    class="btn btn-danger text-white">Hapus</a>
-                                <a href="/admin-detailuser/{{ $item->id }}"
-                                    class="btn btn-warning text-white">Detail</a>
+                            <td>
+                                {{-- <a href="/admin-listuser/{{ $item->id }}/delete"
+                                    class="btn btn-danger text-white">Hapus</a> --}}
+                                <a href="/admin-detailuser/{{ $item->id }}" class="btn btn-warning text-white">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                                <a href="javascript:void(0);" onclick="confirmDelete('{{ $item->id }}')"
+                                    class="btn btn-danger text-white">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -47,3 +53,12 @@
         <!-- /.card-body -->
     </div>
 @endsection
+@push('javascript')
+    <script>
+        function confirmDelete(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus user ini?')) {
+                window.location.href = '/admin-listuser/' + id + '/delete';
+            }
+        }
+    </script>
+@endpush

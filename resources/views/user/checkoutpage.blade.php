@@ -3,120 +3,151 @@
 @section('title', 'Checkout')
 
 @section('content')
-    <section class="checkout px-3">
+    <div class="hero">
         <div class="container">
-            <section class="py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center">
-                            <h3>Checkout</h3>
-                        </div>
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Checkout</h1>
                     </div>
                 </div>
-            </section>
-            <section class="py-5">
-                @php
-                    $sub_total = 0;
-                    $grand_total = 0;
-                    $ongkir = 0;
-                    $administrasi = 0;
-                @endphp
-                <div class="row">
-                    <div class="col-lg-8 mb-5">
-                        <h3 class="mb-3">Data Pembeli</h3>
-                        <form action="#">
-                            <div class="row gy-3 my-2">
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="name">Nama</label>
-                                    <input class="form-control" type="text" id="name"
-                                        value="{{ Auth::user()->name }}" disabled>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="email">Email</label>
-                                    <input class="form-control" type="email" id="email"
-                                        value="{{ Auth::user()->email }}" disabled>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="phone_number">Nomor Telepon</label>
-                                    <input class="form-control" type="text" id="phone_number"
-                                        value="{{ Auth::user()->phone_number }}" disabled>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="kecamatan">Kecamatan</label>
-                                    <input class="form-control" type="text" id="kecamatan"
-                                        value="{{ $user->kecamatan->name }}" disabled>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="kelurahan">Kelurahan</label>
-                                    <input class="form-control" type="text" id="kelurahan"
-                                        value="{{ $user->kelurahan->name }}" disabled>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="alamat">Alamat</label>
-                                    <textarea class="form-control" type="text" id="alamat" disabled>{{ Auth::user()->alamat }}</textarea>
-                                </div>
+                <div class="col-lg-7">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="untree_co-section">
+        <div class="container">
+            @php
+                $sub_total = 0;
+                $grand_total = 0;
+                $ongkir = 0;
+                $administrasi = 0;
+                $total_weight = 0;
+            @endphp
+            <div class="row">
+                <div class="col-md-8 mb-5 mb-md-0">
+                    <h2 class="h3 mb-3 text-black">Informasi Pembeli</h2>
+                    <div class="p-3 p-lg-5 border bg-white">
+                        <div class="form-group row mb-3">
+                            <div class="col-md-12">
+                                <label for="name" class="text-black">Nama<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="{{ Auth::user()->name }}">
                             </div>
-                        </form>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <div class="col-md-6">
+                                <label for="email" class="text-black">Email</label>
+                                <input type="text" class="form-control" id="email" name="email"
+                                    value="{{ Auth::user()->email }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone_number" class="text-black">Phone Number</label>
+                                <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                    value="{{ Auth::user()->phone_number }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <div class="col-md-6">
+                                <label for="kecamatan" class="text-black">Kecamatan</label>
+                                <input type="text" class="form-control" id="kecamatan" name="kecamatan"
+                                    value="{{ $user->kecamatan->name }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="kelurahan" class="text-black">Keluurahan</label>
+                                <input type="text" class="form-control" id="kelurahan" name="kelurahan"
+                                    value="{{ $user->kelurahan->name }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <div class="col-md-12">
+                                <label for="alamat" class="text-black">Alamat Lengkap <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="alamat" name="alamat"
+                                    placeholder="Street address" value="{{ Auth::user()->alamat }}">
+                            </div>
+                        </div>
+
+
                     </div>
-                    <!-- ORDER SUMMARY-->
-                    <div class="col-lg-4">
-                        <div class="card border-0 rounded-0 p-lg-4 bg-light">
-                            <div class="card-body">
-                                <h5 class="mb-5">Pesananmu</h5>
-                                <ul class="list-unstyled mb-0">
-                                    <p class="fw-bold">Daftar Produk</p>
-                                    @foreach ($carts as $cart)
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h2 class="h3 mb-3 text-black">Your Order</h2>
+                            <div class="p-3 p-lg-5 border bg-white">
+                                <table class="table site-block-order-table mb-5">
+                                    <thead>
+                                        <th>Product</th>
+                                        <th>Total</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($carts as $cart)
+                                            @php
+                                                $sub_total += $cart->product->price * $cart->quantity;
+                                                $total_weight += $cart->product->weight * $cart->quantity;
+                                            @endphp
+                                            @php
+                                                if ($cart->bengkel->kecamatan_id == $user->kecamatan->id) {
+                                                    $ongkir = 15000;
+                                                } else {
+                                                    $ongkir = 25000;
+                                                }
+
+                                                // Jika total berat lebih dari 10 kg, hitung tambahan ongkir
+                                                if ($total_weight > 10) {
+                                                    $extra_weight = $total_weight - 10;
+                                                    $ongkir += $extra_weight * 10000; // tambahkan biaya untuk setiap kg tambahan
+                                                }
+                                            @endphp
+                                            @php
+                                                $administrasi = 0.05 * $sub_total;
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $cart->product->name }} <strong class="mx-2">x</strong>
+                                                    {{ $cart->quantity }}</td>
+                                                <td>Rp{{ number_format($cart->product->price * $cart->quantity) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <table class="table site-block-order-table mb-5">
+                                    <tbody>
+                                        <tr class="mt-5">
+                                            <td class="text-black font-weight-bold"><strong>Product Total</strong></td>
+                                            <td class="text-black font-weight-bold">
+                                                <strong>Rp{{ number_format($sub_total) }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr class="mt-5">
+                                            <td class="text-black font-weight-bold"><strong>Ongkos Kirim</strong></td>
+                                            <td class="text-black font-weight-bold">
+                                                <strong>Rp{{ number_format($ongkir) }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr class="mt-5">
+                                            <td class="text-black font-weight-bold"><strong>Biaya Admin</strong></td>
+                                            <td class="text-black font-weight-bold">
+                                                <strong>Rp{{ number_format($administrasi) }}</strong>
+                                            </td>
+                                        </tr>
                                         @php
-                                            $sub_total += $cart->product->price * $cart->quantity;
+                                            $grand_total = $sub_total + $ongkir + $administrasi;
                                         @endphp
-                                        @php
-                                            if ($cart->bengkel->kecamatan_id == $user->kecamatan->id) {
-                                                $ongkir = 15000;
-                                            } else {
-                                                $ongkir = 25000;
-                                            }
-                                        @endphp
-                                        @php
-                                            $administrasi = 0.05 * $sub_total;
-                                        @endphp
-                                        <li class="d-flex align-items-center justify-content-between">
-                                            <strong class="small fw-bold">{{ $cart->product->name }}</strong>
-                                            <span
-                                                class="text-muted small">Rp{{ number_format($cart->product->price * $cart->quantity) }}</span>
-                                        </li>
-                                        <li class="border-bottom my-2"></li>
-                                    @endforeach
-                                    <p class="fw-bold mt-5">Rincian Pembayaran</p>
-                                    <li class="d-flex align-items-center justify-content-between">
-                                        <strong class="small fw-bold">Total Produk</strong>
-                                        <span class="text-muted small"
-                                            id="subTotal">Rp{{ number_format($sub_total) }}</span>
-                                    </li>
-                                    <li class="border-bottom my-2"></li>
-                                    <li class="d-flex align-items-center justify-content-between">
-                                        <strong class="small fw-bold">Ongkos Kirim</strong>
-                                        <span class="text-muted small"
-                                            id="ongkosKirim">Rp{{ number_format($ongkir) }}</span>
-                                    </li>
-                                    <li class="border-bottom my-2"></li>
-                                    <li class="d-flex align-items-center justify-content-between">
-                                        <strong class="small fw-bold">Biaya Administrasi</strong>
-                                        <span class="text-muted small"
-                                            id="ongkosKirim">Rp{{ number_format($administrasi) }}</span>
-                                    </li>
-                                    <li class="border-bottom my-2"></li>
-                                    @php
-                                        $grand_total = $sub_total + $ongkir + $administrasi;
-                                    @endphp
-                                    <li class="d-flex align-items-center justify-content-between">
-                                        <strong class="small fw-bold">Grand Total</strong>
-                                        <span id="grandTotal">Rp{{ number_format($grand_total) }}</span>
-                                        <input type="hidden" value="{{ $grand_total }}" name="grand_total"
-                                            id="grandTotalValue">
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="mt-5 px-2">
+                                        <tr class="mt-5">
+                                            <td class="text-black font-weight-bold"><strong>Grand Total</strong></td>
+                                            <td class="text-black font-weight-bold">
+                                                <strong>Rp{{ number_format($grand_total) }}</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                                 <form action="{{ route('checkout.process') }}" method="post" class="">
                                     @csrf
                                     <input type="hidden" name="grand_total" value="{{ $grand_total }}"
@@ -129,13 +160,16 @@
                                             Sekarang</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </section>
+            </div>
+            <!-- </form> -->
         </div>
-    </section>
+    </div>
 @endsection
 
 @push('javascript')

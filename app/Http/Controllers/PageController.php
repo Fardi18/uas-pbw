@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    public function home()
+    {
+        // Mengambil 3 produk terbaru berdasarkan created_at
+        $products = Product::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view("user.landingpage", compact('products'));
+    }
     public function index(Request $request)
     {
         $keyword = $request->keyword;

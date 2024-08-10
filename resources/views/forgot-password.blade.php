@@ -15,15 +15,21 @@
         integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Bengkelin | Lupa Password</title>
+    <link href="{{ asset('/user-tamplate') }}/css/style.css" rel="stylesheet">
+
+    <title>Repair X Shop | Lupa Password</title>
 
     <style>
+        body {
+            background-color: #3b5d50;
+        }
+
         .login-box {
             /* border: solid 1px gray; */
-            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-            width: 500px;
+            /* box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; */
+            /* width: 500px; */
             background-color: white;
-            border-radius: 32px
+            /* border-radius: 32px */
         }
     </style>
 </head>

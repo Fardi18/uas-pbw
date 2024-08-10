@@ -11,7 +11,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/owner">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('admin-index') }}">Home</a></li>
                         <li class="breadcrumb-item active">Booking List</li>
                     </ol>
                 </div><!-- /.col -->
@@ -60,7 +60,9 @@
                                                         <td>{{ $booking->brand }} {{ $booking->model }}</td>
                                                         <td>
                                                             <a href="/admin-detailbooking/{{ $booking->id }}"
-                                                                class="btn btn-warning text-white">Detail</a>
+                                                                class="btn btn-warning text-white">
+                                                                <i class="fa-regular fa-eye"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

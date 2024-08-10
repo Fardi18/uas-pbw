@@ -32,10 +32,16 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->phone_number }}</td>
-                            <td><a href="/admin-listowner/{{ $item->id }}/delete"
-                                    class="btn btn-danger text-white">Hapus</a>
-                                <a href="/admin-detailowner/{{ $item->id }}"
-                                    class="btn btn-warning text-white">Detail</a>
+                            <td>
+                                {{-- <a href="/admin-listowner/{{ $item->id }}/delete"
+                                    class="btn btn-danger text-white">Hapus</a> --}}
+                                <a href="/admin-detailowner/{{ $item->id }}" class="btn btn-warning text-white">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                                <a href="javascript:void(0);" onclick="confirmDelete('{{ $item->id }}')"
+                                    class="btn btn-danger text-white">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -45,3 +51,12 @@
         <!-- /.card-body -->
     </div>
 @endsection
+@push('javascript')
+    <script>
+        function confirmDelete(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus owner ini?')) {
+                window.location.href = '/admin-listowner/' + id + '/delete';
+            }
+        }
+    </script>
+@endpush

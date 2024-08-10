@@ -3,15 +3,19 @@
 @section('title', 'Daftar Booking')
 
 @section('content')
-    <section class="service">
-        <div class="container" style="margin-bottom: 200px;">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center my-5">
-                        <h3 class="title">List Booking</h3>
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-12">
+                    <div class="">
+                        <h1>List Booking</h1>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <section class="">
+        <div class="container">
             <div class="row ">
                 @if ($bookings->isEmpty())
                     <p><i class="text-warning">Ups, Kamu belum memiliki data booking</i></p>
@@ -35,7 +39,8 @@
                                         <td>{{ $booking->waktu_booking }}</td>
                                         <td>{{ $booking->booking_status }}</td>
                                         <td>
-                                            <a href="/profile-booking/{{ $booking->id }}">Detail Booking</a>
+                                            <a class="btn btn-md btn-primary"
+                                                href="/profile-booking/{{ $booking->id }}">Detail Booking</a>
                                         </td>
                                     </tr>
                                 @endforeach

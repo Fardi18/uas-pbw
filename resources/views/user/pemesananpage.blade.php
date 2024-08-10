@@ -3,7 +3,17 @@
 @section('title', 'Pesan Bengkel')
 
 @section('content')
-
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-12">
+                    <div class="">
+                        <h1>Halaman Pemesanan <br> {{ $bengkel->name }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="mb-xl-5 pesan">
         <div class="pesan-bengkel">
             <div class="container my-3 p-5">

@@ -40,8 +40,22 @@
                                 placeholder="Nama bengkel">
                         </div>
                         <div class="form-group">
+                            <label>Spesialis Bengkel</label>
+                            <div class="row">
+                                @foreach ($specialists as $specialist)
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="specialist_ids[]"
+                                                value="{{ $specialist->id }}">
+                                            <label class="form-check-label">{{ $specialist->name }}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Deskripsi Bengkel</label>
-                            <textarea type="text" class="form-control" id="bengkel_description" name="bengkel_description"
+                            <textarea rows="10" type="text" class="form-control" id="bengkel_description" name="bengkel_description"
                                 placeholder="Deskripsi bengkel"></textarea>
                         </div>
                         <div class="form-group">
@@ -61,13 +75,10 @@
                         </div>
                         <div class="form-group">
                             <label for="bengkel_address">Alamat Bengkel</label>
-                            <input type="text" class="form-control" id="bengkel_address" name="bengkel_address"
-                                placeholder="Nama bengkel">
-                        </div>
-                        <div class="form-group">
-                            <label for="link_bengkel_address">Link Maps Bengkel</label>
-                            <input type="text" class="form-control" id="link_bengkel_address" name="link_bengkel_address"
-                                placeholder="Nama bengkel">
+                            {{-- <input type="text" class="form-control" id="bengkel_address" name="bengkel_address"
+                                placeholder="Nama bengkel"> --}}
+                            <textarea rows="10" type="text" class="form-control" id="bengkel_address" name="bengkel_address"
+                                placeholder="Alamat bengkel"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="image">Gambar Bengkel</label>

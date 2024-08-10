@@ -19,7 +19,7 @@ class ServiceController extends Controller
         $kecamatan_id = $request->kecamatan_id;
         $kelurahan_id = $request->kelurahan_id;
 
-        $query = Bengkel::query();
+        $query = Bengkel::with('specialists');
 
         if ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%')
@@ -51,7 +51,7 @@ class ServiceController extends Controller
 
     public function detailBengkel($id)
     {
-        $bengkel['bengkels'] = Bengkel::with(['layanans', 'jadwals', 'products', 'kecamatan', 'kelurahan'])
+        $bengkel['bengkels'] = Bengkel::with(['layanans', 'jadwals', 'products', 'kecamatan', 'kelurahan', 'specialists'])
             ->findOrFail($id);
         return view('user/detailbengkelpage', ['bengkels' => $bengkel]);
     }

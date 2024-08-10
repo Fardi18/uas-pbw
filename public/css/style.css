@@ -78,14 +78,14 @@ nav .kanan .signup {
 }
 
 /* LANDING PAGE */
-.hero {
+/* .hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url("../css/bengkels2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
     height: 100vh;
-}
+} */
 
 .keunggulan {
     margin-top: 100px;

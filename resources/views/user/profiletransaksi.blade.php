@@ -3,16 +3,20 @@
 @section('title', 'Daftar Transaksi')
 
 @section('content')
-    <section class="service">
-        <div class="container" style="margin-bottom: 200px;">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center my-5">
-                        <h3 class="title">List Transaksi</h3>
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-12">
+                    <div class="">
+                        <h1>List Transaksi</h1>
                     </div>
                 </div>
             </div>
-            <div class="row ">
+        </div>
+    </div>
+    <section class="">
+        <div class="container">
+            <div class="row">
                 @if ($transactions->isEmpty())
                     <p><i class="text-warning">Ups, Kamu belum memiliki transaksi</i></p>
                 @else
@@ -37,7 +41,8 @@
                                         <td>Rp{{ number_format($transaction->grand_total) }}</td>
                                         <td>{{ $transaction->payment_status }}</td>
                                         <td>
-                                            <a href="{{ route('customer.show.transaction', $transaction) }}">Detail
+                                            <a class="btn btn-md btn-primary"
+                                                href="{{ route('customer.show.transaction', $transaction) }}">Detail
                                                 Transaction</a>
                                         </td>
                                     </tr>

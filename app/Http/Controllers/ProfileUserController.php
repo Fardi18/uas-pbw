@@ -73,7 +73,7 @@ class ProfileUserController extends Controller
         $idUser = $user->id;
 
         $bookings = Booking::with(['user', 'bengkel'])
-            ->where('user_id', $idUser)->orderBy('id', 'desc')->paginate(4);
+            ->where('user_id', $idUser)->orderBy('id', 'desc')->get();
 
         return view('user.profilebooking', ['user' => $user, 'bookings' => $bookings]);
     }
@@ -90,7 +90,7 @@ class ProfileUserController extends Controller
         $idUser = $user->id;
 
         $transactions = Transaction::with(['user', 'bengkel'])
-            ->where('user_id', $idUser)->get();
+            ->where('user_id', $idUser)->orderBy('id', 'desc')->get();
 
         return view('user.profiletransaksi', ['user' => $user, 'transactions' => $transactions]);
     }

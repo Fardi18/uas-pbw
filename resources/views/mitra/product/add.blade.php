@@ -60,12 +60,15 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Gambar Produk</label>
+                            <img id="image-preview" src="#" alt="Image Preview"
+                                style="display: none; margin-top: 10px; max-width: 400px; max-height: 400px;">
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image">
                                     <label class="custom-file-label" for="image">Cari Foto</label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -81,4 +84,18 @@
 @endsection
 
 @push('javascript')
+    <script>
+        document.getElementById('image').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var preview = document.getElementById('image-preview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
 @endpush
