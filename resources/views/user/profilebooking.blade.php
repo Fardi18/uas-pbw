@@ -26,6 +26,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Nama Bengkel</th>
+                                    <th scope="col">Tanggal Booking</th>
                                     <th scope="col">Waktu Booking</th>
                                     <th scope="col">Status Booking</th>
                                     <th scope="col">Aksi</th>
@@ -36,6 +37,7 @@
                                     <tr>
                                         <th scope="row">{{ $booking->id }}</th>
                                         <td>{{ $booking->bengkel->name }}</td>
+                                        <td>{{ $booking->tanggal_booking }}</td>
                                         <td>{{ $booking->waktu_booking }}</td>
                                         <td>{{ $booking->booking_status }}</td>
                                         <td>

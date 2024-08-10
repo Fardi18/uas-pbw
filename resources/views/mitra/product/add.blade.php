@@ -41,27 +41,37 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Deskripsi Produk</label>
-                            <textarea type="text" class="form-control" id="description" name="description" placeholder="Deskripsi produk"></textarea>
+                            <textarea rows="5" type="text" class="form-control" id="description" name="description"
+                                placeholder="Deskripsi produk"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="price">Harga Produk</label>
-                            <input type="number" class="form-control" id="price" name="price"
-                                placeholder="Harga produk">
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Berat Produk (kg)</label>
-                            <input type="number" class="form-control" id="weight" name="weight"
-                                placeholder="Berat produk">
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Stok Produk</label>
-                            <input type="number" class="form-control" id="stock" name="stock"
-                                placeholder="Stok produk">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="price">Harga Produk</label>
+                                    <input type="number" class="form-control" id="price" name="price"
+                                        placeholder="Harga produk">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="price">Berat Produk (kg)</label>
+                                    <input type="number" class="form-control" id="weight" name="weight"
+                                        placeholder="Berat produk">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="price">Stok Produk</label>
+                                    <input type="number" class="form-control" id="stock" name="stock"
+                                        placeholder="Stok produk">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="image">Gambar Produk</label>
                             <img id="image-preview" src="#" alt="Image Preview"
-                                style="display: none; margin-top: 10px; max-width: 400px; max-height: 400px;">
+                                style="display: none; margin-top: 10px; max-width: 400px; max-height: 400px;"
+                                class="mb-2">
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image">

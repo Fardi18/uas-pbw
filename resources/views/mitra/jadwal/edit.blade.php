@@ -35,40 +35,124 @@
                     @csrf
                     @method('put')
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="jadwal_senin">Senin</label>
-                            <input type="text" class="form-control" id="jadwal_senin" name="jadwal_senin"
-                                placeholder="Jadwal senin" value="{{ $jadwal->senin }}">
+                        {{-- senin --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_senin">Senin Buka</label>
+                                    <input type="time" class="form-control" id="senin_buka" name="senin_buka"
+                                        value="{{ $jadwal->senin_buka }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_senin">Senin Tutup</label>
+                                    <input type="time" class="form-control" id="senin_tutup" name="senin_tutup"
+                                        value="{{ $jadwal->senin_tutup }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="jadwal_selasa">Selasa</label>
-                            <input type="text" class="form-control" id="jadwal_selasa" name="jadwal_selasa"
-                                placeholder="Jadwal senin" value="{{ $jadwal->selasa }}">
+                        {{-- selasa --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_selasa">Selasa Buka</label>
+                                    <input type="time" class="form-control" id="selasa_buka" name="selasa_buka"
+                                        value="{{ $jadwal->selasa_buka }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_selasa">Selasa Tutup</label>
+                                    <input type="time" class="form-control" id="selasa_tutup" name="selasa_tutup"
+                                        value="{{ $jadwal->selasa_tutup }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="jadwal_rabu">Rabu</label>
-                            <input type="text" class="form-control" id="jadwal_rabu" name="jadwal_rabu"
-                                placeholder="Jadwal rabu" value="{{ $jadwal->rabu }}">
+                        {{-- rabu --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_rabu">Rabu Buka</label>
+                                    <input type="time" class="form-control" id="rabu_buka" name="rabu_buka"
+                                        value="{{ $jadwal->rabu_buka }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_rabu">Rabu Tutup</label>
+                                    <input type="time" class="form-control" id="rabu_tutup" name="rabu_tutup"
+                                        value="{{ $jadwal->rabu_tutup }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="jadwal_kamis">Kamis</label>
-                            <input type="text" class="form-control" id="jadwal_kamis" name="jadwal_kamis"
-                                placeholder="Jadwal kamis" value="{{ $jadwal->kamis }}">
+                        {{-- kamis --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_kamis">Kamis Buka</label>
+                                    <input type="time" class="form-control" id="kamis_buka" name="kamis_buka"
+                                        value="{{ $jadwal->kamis_buka }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_kamis">Kamis Tutup</label>
+                                    <input type="time" class="form-control" id="kamis_tutup" name="kamis_tutup"
+                                        value="{{ $jadwal->kamis_tutup }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="jadwal_jumat">Jumat</label>
-                            <input type="text" class="form-control" id="jadwal_jumat" name="jadwal_jumat"
-                                placeholder="Jadwal jumat" value="{{ $jadwal->jumat }}">
+                        {{-- jumat --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_jumat">Jumat Buka</label>
+                                    <input type="time" class="form-control" id="jumat_buka" name="jumat_buka"
+                                        value="{{ $jadwal->jumat_buka }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_jumat">Jumat Tutup</label>
+                                    <input type="time" class="form-control" id="jumat_tutup" name="jumat_tutup"
+                                        value="{{ $jadwal->jumat_tutup }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="bengkel_name">Sabtu</label>
-                            <input type="text" class="form-control" id="jadwal_sabtu" name="jadwal_sabtu"
-                                placeholder="Jadwal sabtu" value="{{ $jadwal->sabtu }}">
+                        {{-- sabtu --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_sabtu">Sabtu Buka</label>
+                                    <input type="time" class="form-control" id="sabtu_buka" name="sabtu_buka"
+                                        value="{{ $jadwal->sabtu_buka }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_sabtu">Sabtu Tutup</label>
+                                    <input type="time" class="form-control" id="sabtu_tutup" name="sabtu_tutup"
+                                        value="{{ $jadwal->sabtu_tutup }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="jadwal_minggu">Minggu</label>
-                            <input type="text" class="form-control" id="jadwal_minggu" name="jadwal_minggu"
-                                placeholder="Jadwal minggu" value="{{ $jadwal->minggu }}">
+                        {{-- minggu --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_minggu">Minggu Buka</label>
+                                    <input type="time" class="form-control" id="minggu_buka" name="minggu_buka"
+                                        value="{{ $jadwal->minggu_buka }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jadwal_minggu">Minggu Tutup</label>
+                                    <input type="time" class="form-control" id="minggu_tutup" name="minggu_tutup"
+                                        value="{{ $jadwal->minggu_tutup }}">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->

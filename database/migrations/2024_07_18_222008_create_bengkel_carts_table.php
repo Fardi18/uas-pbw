@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreign('bengkel_id')->references('id')->on('bengkels')->onDelete('cascade');
             $table->foreignId('booking_id');
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
-            $table->foreignId('product_id');
+            $table->foreignId('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreignId('layanan_id');
+            $table->foreignId('layanan_id')->nullable();
             $table->foreign('layanan_id')->references('id')->on('layanans')->onDelete('cascade');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -113,31 +113,31 @@
                                 @foreach ($bengkel->jadwals as $jadwal)
                                     <tr>
                                         <td>Senin</td>
-                                        <td>{{ $jadwal->senin }}</td>
+                                        <td>{{ $jadwal->senin_buka }} - {{ $jadwal->senin_tutup }}</td>
                                     </tr>
                                     <tr>
                                         <td>Selasa</td>
-                                        <td>{{ $jadwal->selasa }}</td>
+                                        <td>{{ $jadwal->selasa_buka }} - {{ $jadwal->selasa_tutup }}</td>
                                     </tr>
                                     <tr>
                                         <td>Rabu</td>
-                                        <td>{{ $jadwal->rabu }}</td>
+                                        <td>{{ $jadwal->rabu_buka }} - {{ $jadwal->rabu_tutup }}</td>
                                     </tr>
                                     <tr>
                                         <td>Kamis</td>
-                                        <td>{{ $jadwal->kamis }}</td>
+                                        <td>{{ $jadwal->kamis_buka }} - {{ $jadwal->kamis_tutup }}</td>
                                     </tr>
                                     <tr>
                                         <td>Jumat</td>
-                                        <td>{{ $jadwal->jumat }}</td>
+                                        <td>{{ $jadwal->jumat_buka }} - {{ $jadwal->jumat_tutup }}</td>
                                     </tr>
                                     <tr>
                                         <td>Sabtu</td>
-                                        <td>{{ $jadwal->sabtu }}</td>
+                                        <td>{{ $jadwal->sabtu_buka }} - {{ $jadwal->sabtu_tutup }}</td>
                                     </tr>
                                     <tr>
                                         <td>Minggu</td>
-                                        <td>{{ $jadwal->minggu }}</td>
+                                        <td>{{ $jadwal->minggu_buka }} - {{ $jadwal->minggu_tutup }}</td>
                                     </tr>
                                     <tr>
                                         <td>Libur Nasional</td>

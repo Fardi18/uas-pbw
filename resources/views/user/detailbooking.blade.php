@@ -29,6 +29,10 @@
                                 <td>{{ $booking->bengkel->name }}</td>
                             </tr>
                             <tr>
+                                <th scope="col">Tanggal Booking</th>
+                                <td>{{ $booking->tanggal_booking }}</td>
+                            </tr>
+                            <tr>
                                 <th scope="col">Waktu Booking</th>
                                 <td>{{ $booking->waktu_booking }}</td>
                             </tr>

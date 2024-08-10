@@ -27,7 +27,7 @@ class Bengkel extends Model
 
     public function booking()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasOne(Booking::class);
     }
 
     public function jadwals()

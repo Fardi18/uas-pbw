@@ -14,6 +14,7 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'bengkel_id',
+        'tanggal_booking',
         'waktu_booking',
         'brand',
         'model',

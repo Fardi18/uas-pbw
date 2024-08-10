@@ -42,7 +42,7 @@ class AuthController extends Controller
             'email' => ['required', 'string', 'max:100', 'email', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone_number' => ['required', 'string'],
-            'alamat' => ['required', 'string', 'max:100'],
+            'alamat' => ['required', 'string'],
             'kecamatan_id' => ['required'],
             'kelurahan_id' => ['required'],
         ]);

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('bengkel_id');
             $table->foreign('bengkel_id')->references('id')->on('bengkels')->onDelete('cascade');
-            $table->dateTime('waktu_booking');
+            $table->time('waktu_booking');
+            $table->date('tanggal_booking');
             $table->string('brand');
             $table->string('model');
             $table->string('plat');

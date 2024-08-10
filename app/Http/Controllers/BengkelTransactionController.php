@@ -24,7 +24,7 @@ class BengkelTransactionController extends Controller
         $bengkel = Bengkel::where('pemilik_id', $owner_id)->first(); // Mengambil record pertama
         if ($bengkel) {
             $bengkel_id = $bengkel->id; // Mengambil nilai id dari record tersebut
-            $transactions = Transaction::where('bengkel_id', $bengkel_id)->paginate(10);
+            $transactions = Transaction::where('bengkel_id', $bengkel_id)->orderBy('created_at', 'desc')->get();
         } else {
             // Handle jika tidak ada bengkel yang ditemukan untuk owner_id tersebut
             $transactions = collect(); // Mengembalikan collection kosong
@@ -213,7 +213,9 @@ class BengkelTransactionController extends Controller
                 'address' => $carts->first()->user->alamat,
             ],
             'enabled_payments' => [
-                'gopay', 'permata_va', 'bank_transfer',
+                'gopay',
+                'permata_va',
+                'bank_transfer',
             ],
             'vtweb' => [],
         ];

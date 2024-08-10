@@ -143,6 +143,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/profile-booking/{id}', [ProfileUserController::class, 'showBooking']);
     Route::get('/booking/add/{id}', [ServiceController::class, 'bookingPage']);
     Route::post('/booking', [BookingController::class, 'booking']);
+    Route::get('/api/bengkel/{bengkel}/booked-times', [BookingController::class, 'getBookedTimes']);
     // Transaction
     Route::get('/profile-transaction', [ProfileUserController::class, 'transactionList']);
     Route::get('/profile-transaction/{transaction}', [ProfileUserController::class, 'showTransaction'])->name('customer.show.transaction');

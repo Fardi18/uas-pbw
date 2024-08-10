@@ -27,8 +27,8 @@ return new class extends Migration
             $table->foreignId('layanan_id')->nullable();
             $table->foreign('layanan_id')->references('id')->on('layanans')->onDelete('cascade');
             $table->integer('administrasi')->nullable();
-            $table->enum('payment_status', array('pending', 'success', 'failed', 'expired'));
-            $table->enum('shipping_status', array('Pending', 'Disiapkan', 'Dikirim', 'Delesai'));
+            $table->enum('payment_status', array('pending', 'success', 'failed', 'expired'))->nullable();
+            $table->enum('shipping_status', array('Pending', 'Disiapkan', 'Dikirim', 'Delesai'))->nullable();
             $table->integer('ongkir')->nullable();
             $table->bigInteger('grand_total');
             $table->timestamps();
