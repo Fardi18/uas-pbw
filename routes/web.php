@@ -1,29 +1,31 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BengkelBookingController;
 use App\Http\Controllers\BengkelController;
+use App\Http\Controllers\BengkelTransactionController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\LayananController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\LayananController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileUserController;
-use App\Http\Controllers\BengkelBookingController;
-use App\Http\Controllers\BengkelTransactionController;
+use App\Http\Controllers\ServiceController;
 
-use App\Models\User;
 use App\Models\PemilikBengkel;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -227,3 +229,5 @@ Route::prefix('/owner')->middleware('auth:owner')->group(function () {
     Route::delete('/transaction/cart/{id}', [BengkelTransactionController::class, 'removeFromCart'])->name('remove.from.cart');
     Route::post('/checkout/process/owner', [BengkelTransactionController::class, 'checkoutProcessForOwner'])->name('checkout.process.owner');
 });
+
+Route::match(['get', 'post'], '/botman', [ChatbotController::class, 'handle']);

@@ -3,6 +3,7 @@
 @section('title', 'Welcome')
 
 @section('content')
+    <script id="botmanWidget" src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/chat.js'></script>
     {{-- hero --}}
     <div class="hero">
         <div class="container">
@@ -153,4 +154,10 @@
             </div>
         </div>
     </div>
+    <script>
+        var botmanWidget = {
+            aboutText: 'Bengkelin',
+            introMessage: "Halo, Selamat Datang di Bengkelin\nSilahkan pilih topik\n1. Pengiriman Produk\n2. Layanan Bengkel\n3.Cara Mendaftar Akun"
+        };
+    </script>
 @endsection
