@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function kecamatan()
     {
-        return $this->belongsTo(kecamatan::class);
+        return $this->belongsTo(Kecamatan::class);
     }
 
     public function kelurahan()

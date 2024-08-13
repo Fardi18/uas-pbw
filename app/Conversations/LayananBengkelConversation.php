@@ -99,7 +99,7 @@ class LayananBengkelConversation extends Conversation
                 $this->say("- " . $bengkel->name . ", Alamat: " . $bengkel->alamat . ", " . $link);
             }
         } else {
-            $this->say("Tidak ada bengkel yang ditemukan di kelurahan ini.");
+            $this->say("Tidak ada bengkel yang ditemukan di kelurahan ini. kemudian ketik 0 untuk kembali");
         }
     }
 }
