@@ -115,14 +115,19 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <form action="{{ route('delete_cart', $cart) }}" method="post">
-                                                    @method('delete')
+                                            {{-- <td>
+                                                <form action="{{ route('delete_cart', $cart) }}" method="POST">
+                                                    @method('DELETE')
                                                     @csrf
-                                                    <button class="btn fs-4 me-3">
+                                                    <button type="submit" class="btn fs-4 me-3">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </button>
                                                 </form>
+                                            </td> --}}
+                                            <td>
+                                                <button type="button" class="btn fs-4 me-3 delete-cart-item">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -210,6 +215,7 @@
                 updateTotalCartPrice();
             }
 
+
             function updateTotalCartPrice() {
                 let totalCartPrice = 0;
                 document.querySelectorAll('.price').forEach(priceElement => {
@@ -236,6 +242,49 @@
                         }
                     })
                     .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-cart-item');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const cartId = this.closest('tr').dataset.cartId;
+                    deleteCartItem(cartId, this.closest('tr'));
+                });
+            });
+
+            function deleteCartItem(cartId, rowElement) {
+                fetch(`/cart/${cartId}/delete`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            rowElement.remove();
+                            updateTotalCartPrice();
+                            if (document.querySelectorAll('tbody tr').length === 0) {
+                                document.querySelector('.site-blocks-table').innerHTML =
+                                    '<div class="text-center"><h5>Tidak ada produk dalam keranjang.</h5></div>';
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function updateTotalCartPrice() {
+                let totalCartPrice = 0;
+                document.querySelectorAll('.price').forEach(priceElement => {
+                    totalCartPrice += parseInt(priceElement.textContent.replace('Rp', '').replace(',', ''));
+                });
+                document.querySelector('.total-cart-price').textContent = `Rp${totalCartPrice.toLocaleString()}`;
             }
         });
     </script>

@@ -153,7 +153,11 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/{product}', [CartController::class, 'addToCart'])->name('add_toCart');
     Route::patch('/cart/{cart}', [CartController::class, 'updateCart'])->name('update_cart');
-    Route::delete('/cart/{cart}', [CartController::class, 'deleteCart'])->name('delete_cart');
+    // Route::delete('/cart/{cart}', [CartController::class, 'deleteCart'])->name('delete_cart');
+
+    Route::delete('/cart/{cart}/delete', [CartController::class, 'deleteCart'])->name('delete_cart');
+
+
     // Checkout
     Route::get('/checkout-page', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
     Route::post('/checkout', [CheckoutController::class, 'checkoutProcess'])->name('checkout.process');
