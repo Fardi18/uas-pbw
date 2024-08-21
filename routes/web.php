@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\ServiceController;
 
+use App\Http\Controllers\WithdrawRequestController;
 use App\Models\PemilikBengkel;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+
 
 
 /*
@@ -184,6 +186,9 @@ Route::middleware(['auth:admin'])->group(function () {
     // transaction
     Route::get('/admin-transaction', [AdminController::class, 'listtransaction'])->name('showlisttransaction');
     Route::get('/admin-transaction/{transaction}', [AdminController::class, 'detailtransaction'])->name('admin.show.transaction');
+
+    Route::get('/admin-withdrawal_requests', [WithdrawRequestController::class, 'index'])->name('admin.withdrawal_requests.index');
+    Route::put('/admin-withdrawal_requests/{id}', [WithdrawRequestController::class, 'updateStatus'])->name('admin.withdrawal_requests.updateStatus');
 });
 
 // BENGKEL
@@ -232,6 +237,10 @@ Route::prefix('/owner')->middleware('auth:owner')->group(function () {
     Route::post('/transaction/{id}', [BengkelTransactionController::class, 'addToCart'])->name('add.to.cart');
     Route::delete('/transaction/cart/{id}', [BengkelTransactionController::class, 'removeFromCart'])->name('remove.from.cart');
     Route::post('/checkout/process/owner', [BengkelTransactionController::class, 'checkoutProcessForOwner'])->name('checkout.process.owner');
+
+
+    Route::get('/withdrawal_requests', [WithdrawRequestController::class, 'index'])->name('pemilik_bengkel.withdrawal_requests.index');
+    Route::post('/withdrawal_requests', [WithdrawRequestController::class, 'store'])->name('pemilik_bengkel.withdrawal_requests.store');
 });
 
 Route::match(['get', 'post'], '/botman', [ChatbotController::class, 'handle']);

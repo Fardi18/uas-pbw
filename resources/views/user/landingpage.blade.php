@@ -157,7 +157,7 @@
     <script>
         var botmanWidget = {
             aboutText: 'Bengkelin',
-            introMessage: "Halo, Selamat Datang di Bengkelin\nSilahkan pilih topik\n1. Pengiriman Produk\n2. Layanan Bengkel\n3.Cara Mendaftar Akun"
+            introMessage: "Halo, Selamat Datang di Bengkelin<br>Silahkan pilih topik:<br>1. Pengiriman Produk<br>2. Layanan Bengkel<br>3. Cara Mendaftar Akun"
         };
     </script>
 @endsection
