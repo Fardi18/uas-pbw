@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('bengkel_id')->constrained('bengkels')->onDelete('cascade');
             $table->decimal('amount', 10, 2);
             $table->enum('status', ['pending', 'transferred'])->default('pending');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

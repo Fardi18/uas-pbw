@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->timestamp('withdrawn_at')->nullable();
-            $table->string('image')->nullable();
         });
     }
 
@@ -28,7 +27,6 @@ return new class extends Migration
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->dropColumn('withdrawn_at');
-            $table->dropColumn('image');
         });
     }
 };
