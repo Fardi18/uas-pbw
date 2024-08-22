@@ -3,7 +3,7 @@
 @section('title', 'Welcome')
 
 @section('content')
-    <script id="botmanWidget" src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/chat.js'></script>
+    {{-- <script id="botmanWidget" src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/chat.js'></script> --}}
     {{-- hero --}}
     <div class="hero">
         <div class="container">

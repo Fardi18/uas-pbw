@@ -53,8 +53,7 @@ class ChatbotController extends Controller
     {
         $message = "Layanan Pengiriman Produk:\n" .
             "1. Informasi pickup\n" .
-            "2. Informasi jasa kurir\n" .
-            "Ketik salah satu dari opsi di atas atau ketik 'Kembali ke Menu Utama' untuk kembali.";
+            "2. Informasi jasa kurir\n";
 
         $bot->reply($message);
 
@@ -64,56 +63,33 @@ class ChatbotController extends Controller
 
             if (strtolower($selectedOption) === '1') {
                 // $bot->say('Informasi mengenai pengiriman...');
-                $bot->say("INFO PICKUP BARANG DITEMPAT🔫\n
-
-1.⁠ ⁠*Keuntungan Ambil di Tempat*:
-   - Konsumen dapat langsung mengambil barang yang sudah dipesan tanpa harus menunggu pengiriman.
-   - Tidak ada biaya tambahan untuk pengiriman.
-   - Konsumen dapat langsung memeriksa kondisi barang sebelum membawanya.
-\n
-2.⁠ ⁠*Persyaratan Ambil di Tempat*:
-   - Konsumen harus membawa tanda terima atau nomor pesanan saat mengambil barang.
-   - Konsumen harus datang pada waktu yang telah dijanjikan untuk pengambilan.
-   - Lokasi pengambilan barang biasanya adalah toko, gudang, atau cabang penjual.
-\n
-3.⁠ ⁠*Waktu Pengambilan*:
-   - Waktu pengambilan barang biasanya disesuaikan dengan jam operasional toko atau gudang.
-   - Konsumen disarankan untuk menghubungi penjual terlebih dahulu untuk memastikan waktu dan lokasi pengambilan.
-\n
-4.⁠ ⁠*Pilihan Pembayaran*:
-   - Konsumen dapat membayar barang saat mengambil di tempat.
-   - Beberapa penjual juga menawarkan opsi pembayaran online sebelum pengambilan.
-\n
-5.⁠ ⁠*Jaminan dan Pengembalian*:
-   - Barang yang diambil di tempat tetap memiliki jaminan dan kebijakan pengembalian sesuai dengan ketentuan penjual.
-   - Konsumen dapat langsung mengajukan pengembalian atau perbaikan jika menemukan masalah dengan barang yang diterima.");
+                $bot->say(
+                    "❗️(INFO PICKUP BARANG DITEMPAT)❗️<br><br>" .
+                        "1. Konsumen dapat langsung mengambil barang tanpa menunggu pengiriman.<br>" .
+                        "2. Tidak ada biaya tambahan untuk pengiriman.<br>" .
+                        "3. Konsumen dapat memeriksa kondisi barang sebelum membawanya.<br><br>" .
+                        "🛑Persyaratan Ambil di Tempat<br>" .
+                        "1. Bawa tanda terima atau nomor pesanan saat mengambil barang.<br>" .
+                        "2. Datang pada waktu yang dijanjikan untuk pengambilan.<br>" .
+                        "3. Lokasi pengambilan di toko, gudang, atau cabang penjual.<br><br>" .
+                        "🛑Waktu Pengambilan<br>" .
+                        "1. Disesuaikan dengan jam operasional toko/gudang.<br>" .
+                        "2. Hubungi penjual untuk memastikan waktu dan kondisi.<br>"
+                );
             } elseif (strtolower($selectedOption) === '2') {
-                $bot->say("INFO JASA KURIR🔫
-Berikut ini adalah beberapa informasi terkait pengiriman barang dengan menggunakan jasa kurir:
-\n
-1.⁠ ⁠*Keuntungan Pengiriman Kurir*:
-   - Barang diantar langsung ke alamat tujuan, sehingga lebih praktis dan nyaman bagi konsumen.
-   - Barang dapat dilacak status pengirimannya melalui website atau aplikasi kurir.
-   - Umumnya memiliki waktu pengiriman yang lebih cepat dibandingkan dengan jasa pengiriman lainnya.
-\n
-2.⁠ ⁠*Biaya Pengiriman Kurir*:
-   - Biaya pengiriman kurir bervariasi tergantung pada jarak, berat, dan ukuran barang.
-   - Beberapa kurir menawarkan layanan pengiriman dengan tarif flat atau berlangganan.
-   - Konsumen dapat membandingkan tarif beberapa jasa kurir untuk mendapatkan penawaran terbaik.
-\n
-3.⁠ ⁠*Waktu Pengiriman*:
-   - Waktu pengiriman barang melalui kurir biasanya lebih cepat dibandingkan dengan jasa pengiriman lainnya.
-   - Namun, waktu pengiriman juga dapat dipengaruhi oleh faktor jarak, lalu lintas, dan ketersediaan kurir.
-   - Konsumen dapat meminta perkiraan waktu pengiriman saat melakukan pemesanan.
-\n
-4.⁠ ⁠*Pilihan Layanan Kurir*:
-   - Konsumen dapat memilih jenis layanan kurir sesuai dengan kebutuhan, seperti pengiriman reguler, pengiriman cepat, atau pengiriman khusus (same-day delivery).
-   - Beberapa kurir juga menawarkan layanan asuransi pengiriman untuk melindungi barang.
-\n
-5.⁠ ⁠*Pengambilan Barang oleh Kurir*:
-   - Kurir akan datang ke alamat yang telah ditentukan untuk mengambil barang yang akan dikirim.
-   - Konsumen dapat meminta kurir untuk menunggu sebentar saat barang sedang dikemas.
-");
+                $bot->say(
+                    "❗️(INFO PENGIRIMAN JASA KURIR)❗️<br><br>" .
+                        "1. Barang diantar langsung ke alamat.<br>" .
+                        "2. Lacak status pengiriman.<br>" .
+                        "3. Waktu pengiriman cepat.<br><br>" .
+                        "🛑Biaya Pengiriman Kurir<br>" .
+                        "1. Bervariasi tergantung jarak, berat, dan ukuran.<br>" .
+                        "2. Tarif flat atau berlangganan.<br>" .
+                        "3. Bandingkan beberapa jasa kurir.<br><br>" .
+                        "🛑Pilihan Layanan Kurir<br>" .
+                        "1. Sesuai kebutuhan, seperti reguler, cepat, atau same-day delivery.<br>" .
+                        "2. Layanan asuransi pengiriman."
+                );
             } else {
                 $bot->say('Pilihan tidak valid. Kembali ke Menu Utama.');
                 $this->showMainMenu($bot);
@@ -125,30 +101,11 @@ Berikut ini adalah beberapa informasi terkait pengiriman barang dengan menggunak
     {
         $url = url("/userregister/");
         $link = '<a href="' . $url . '" target="_blank">Klik ini untuk Register</a>';
-        $message = "INFO REGIS🔫
-
-Berikut adalah informasi tentang cara melakukan registrasi:
-\n
-Untuk melakukan registrasi, Anda dapat mengikuti langkah-langkah berikut:
-\n
-1.⁠ ⁠*Kunjungi Halaman Registrasi*:
-   Buka website atau aplikasi Bengkelin(https://danusanhmif.store), kemudian cari dan klik tautan atau tombol \"Daftar\" atau \"Registrasi\" untuk menuju ke halaman registrasi.
-\n
-2.⁠ ⁠*Isi Formulir Registrasi*:
-   Lengkapi formulir registrasi dengan informasi yang diminta, seperti nama, email, nomor telepon, dan kata sandi. Pastikan Anda mengisi semua informasi dengan benar.
-\n
-3.⁠ ⁠*Verifikasi Identitas*:
-   Beberapa layanan mungkin meminta Anda untuk melakukan verifikasi identitas, seperti mengirimkan foto KTP atau membuat akun media sosial terhubung.
-\n
-4.⁠ ⁠*Konfirmasi Registrasi*:
-   Setelah Anda mengisi formulir dengan lengkap, klik tombol \"Daftar\" atau \"Buat Akun\". Anda mungkin akan menerima email konfirmasi atau kode verifikasi untuk menyelesaikan proses registrasi.
-\n
-5.⁠ ⁠*Aktivasi Akun*:
-   Jika Anda menerima email konfirmasi atau kode verifikasi, ikuti instruksi yang diberikan untuk mengaktifkan akun Anda.
-\n
-Anda dapat mengakses halaman registrasi dengan mengklik tautan berikut:
-\n
-[Daftar Sekarang] " . $link;
+        $message = "❗️ (INFO REGISTRASI AKUN)❗️<br><br>" .
+            "1.⁠ ⁠Kunjungi " . $link . "<br>" .
+            "2.⁠ ⁠Isi formulir registrasi dengan informasi yang diminta.<br>" .
+            "3.⁠ ⁠Lakukan verifikasi identitas jika diperlukan.<br>" .
+            "4.⁠ ⁠Konfirmasi registrasi dengan mengklik \"Daftar\" atau \"Buat Akun\"";
 
         $bot->reply($message);
     }
