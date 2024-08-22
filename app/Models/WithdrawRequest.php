@@ -9,10 +9,10 @@ class WithdrawRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['amount', 'status'];
+    protected $fillable = ['bengkel_id', 'amount', 'status', 'image'];
 
-    public function pemilikBengkel()
+    public function bengkel()
     {
-        return $this->belongsTo(PemilikBengkel::class);
+        return $this->belongsTo(Bengkel::class);
     }
 }

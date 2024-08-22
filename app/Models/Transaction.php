@@ -21,6 +21,7 @@ class Transaction extends Model
         'ongkir',
         'administrasi',
         'grand_total',
+        "withdrawn_at"
     ];
 
     public function user()

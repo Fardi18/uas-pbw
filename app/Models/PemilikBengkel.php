@@ -46,9 +46,4 @@ class PemilikBengkel extends Model
     {
         return $this->email;
     }
-
-    public function withdrawalRequests()
-    {
-        return $this->hasMany(WithdrawRequest::class);
-    }
 }

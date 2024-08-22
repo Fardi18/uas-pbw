@@ -2,26 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use App\Models\WithdrawRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+// models
+use App\Models\WithdrawRequest;
+use App\Models\Bengkel;
+use App\Models\Transaction;
 
 class WithdrawRequestController extends Controller
 {
     public function index()
     {
-        $requests = WithdrawRequest::with('pemilikBengkel')->get();
-        return view('admin.withdraw_request', compact('requests'));
+        $pemilik = Auth::user();
+        $pemilik_id = $pemilik->id;
+        $bengkel = Bengkel::where('pemilik_id', $pemilik_id)->first();
+        $bengkel_id = $bengkel->id;
+
+        // Hitung total pendapatan
+        $pencairans = WithdrawRequest::where('bengkel_id', $bengkel_id)
+            ->get();
+
+
+        return view('mitra.withdrawal_requests.index', compact('pencairans'));
+    }
+
+    public function create()
+    {
+        $pemilik = Auth::user();
+        $pemilik_id = $pemilik->id;
+        $bengkel = Bengkel::where('pemilik_id', $pemilik_id)->first();
+        $bengkel_id = $bengkel->id;
+        // Hitung total transaksi sukses yang belum dicairkan
+        $totalTransaksi = Transaction::where('bengkel_id', $bengkel_id)
+            ->where('payment_status', 'success')
+            ->whereNull('withdrawn_at') // Transaksi yang belum dicairkan
+            ->sum(DB::raw('grand_total - (ongkir + administrasi)'));
+
+        return view('mitra.withdrawal_requests.add', compact('totalTransaksi'));
     }
 
     public function store(Request $request)
     {
-        $bengkel = auth()->user()->pemilikBengkel;
+        $pemilik = Auth::user();
+        $pemilik_id = $pemilik->id;
+        $bengkel = Bengkel::where('pemilik_id', $pemilik_id)->first();
+        $bengkel_id = $bengkel->id;
 
-        // Hitung total transaksi sukses
-        $totalTransaksi = Transaction::where('bengkel_id', $bengkel->id)
+        // Hitung total transaksi sukses yang belum dicairkan
+        $totalTransaksi = Transaction::where('bengkel_id', $bengkel_id)
             ->where('payment_status', 'success')
-            ->sum('grand_total');
+            ->whereNull('withdrawn_at') // Transaksi yang belum dicairkan
+            ->sum(DB::raw('grand_total - (ongkir + administrasi)'));
 
         // Cek apakah total transaksi sudah melebihi 50 ribu
         if ($totalTransaksi < 50000) {
@@ -32,26 +65,39 @@ class WithdrawRequestController extends Controller
             'amount' => 'required|numeric|min:1000|max:' . $totalTransaksi,
         ]);
 
-        // Simpan request penarikan
-        $bengkel->withdrawalRequests()->create([
-            'amount' => $request->amount,
-            'status' => 'pending',
-        ]);
+        DB::transaction(function () use ($request, $bengkel_id) {
+            // Buat pencairan
+            WithdrawRequest::create([
+                'bengkel_id' => $bengkel_id,
+                'amount' => $request->amount,
+                'status' => 'pending',
+            ]);
 
-        return redirect()->route('pemilik_bengkel.withdrawal_requests.index')->with('success', 'Withdrawal request has been submitted.');
+            // Tandai transaksi yang sudah dicairkan
+            Transaction::where('bengkel_id', $bengkel_id)
+                ->where('payment_status', 'success')
+                ->whereNull('withdrawn_at')
+                ->update(['withdrawn_at' => now()]);
+        });
+
+        return redirect()->route('owner.withdrawal_request')->with('success', 'Withdrawal request has been submitted.');
     }
 
-    public function updateStatus(Request $request, $id)
+    public function detail($id)
     {
-        $request->validate([
-            'status' => 'required|in:approved,rejected,transferred',
-        ]);
+        $pemilik = Auth::user();
+        $pemilik_id = $pemilik->id;
+        $bengkel = Bengkel::where('pemilik_id', $pemilik_id)->first();
+        $bengkel_id = $bengkel->id;
+        // Mengambil data pencairan berdasarkan ID dan bengkel_id
+        $pencairan = WithdrawRequest::where('bengkel_id', $bengkel_id)
+            ->where('id', $id)
+            ->first(); // Ubah dari get() menjadi first()
 
-        $withdrawalRequest = WithdrawRequest::findOrFail($id);
-        $withdrawalRequest->update([
-            'status' => $request->status,
-        ]);
+        if (!$pencairan) {
+            return redirect()->route('owner.withdrawal_request')->with('error', 'Pencairan tidak ditemukan.');
+        }
 
-        return redirect()->route('admin.withdrawal_requests.index')->with('success', 'Withdrawal request status updated.');
+        return view('mitra.withdrawal_requests.edit', compact('pencairan'));
     }
 }

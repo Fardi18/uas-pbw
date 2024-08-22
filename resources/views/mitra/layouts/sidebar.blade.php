@@ -97,6 +97,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/owner/withdrawal_request" class="nav-link">
+                    <i class="nav-icon fas fa-calendar-alt"></i>
+                    <p>
+                        Pencairan
+                    </p>
+                </a>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

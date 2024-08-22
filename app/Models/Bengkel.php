@@ -60,4 +60,9 @@ class Bengkel extends Model
     {
         return $this->belongsTo(Kelurahan::class);
     }
+
+    public function withdrawalRequests()
+    {
+        return $this->hasMany(WithdrawRequest::class);
+    }
 }

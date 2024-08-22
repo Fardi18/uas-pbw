@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminPencairanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BengkelBookingController;
 use App\Http\Controllers\BengkelController;
@@ -186,9 +187,10 @@ Route::middleware(['auth:admin'])->group(function () {
     // transaction
     Route::get('/admin-transaction', [AdminController::class, 'listtransaction'])->name('showlisttransaction');
     Route::get('/admin-transaction/{transaction}', [AdminController::class, 'detailtransaction'])->name('admin.show.transaction');
-
-    Route::get('/admin-withdrawal_requests', [WithdrawRequestController::class, 'index'])->name('admin.withdrawal_requests.index');
-    Route::put('/admin-withdrawal_requests/{id}', [WithdrawRequestController::class, 'updateStatus'])->name('admin.withdrawal_requests.updateStatus');
+    // pencairan
+    Route::get('/admin-pencairan', [AdminPencairanController::class, 'index'])->name('admin.pencairan');
+    Route::get('/admin-pencairan/{id}/edit', [AdminPencairanController::class, 'edit'])->name('admin.pencairan.edit');
+    Route::put('/admin-pencairan/{id}', [AdminPencairanController::class, 'update'])->name('admin.pencairan.update');
 });
 
 // BENGKEL
@@ -237,10 +239,11 @@ Route::prefix('/owner')->middleware('auth:owner')->group(function () {
     Route::post('/transaction/{id}', [BengkelTransactionController::class, 'addToCart'])->name('add.to.cart');
     Route::delete('/transaction/cart/{id}', [BengkelTransactionController::class, 'removeFromCart'])->name('remove.from.cart');
     Route::post('/checkout/process/owner', [BengkelTransactionController::class, 'checkoutProcessForOwner'])->name('checkout.process.owner');
-
-
-    Route::get('/withdrawal_requests', [WithdrawRequestController::class, 'index'])->name('pemilik_bengkel.withdrawal_requests.index');
-    Route::post('/withdrawal_requests', [WithdrawRequestController::class, 'store'])->name('pemilik_bengkel.withdrawal_requests.store');
+    // Pencairan
+    Route::get('/withdrawal_request', [WithdrawRequestController::class, 'index'])->name('owner.withdrawal_request');
+    Route::get('/withdrawal_request/add', [WithdrawRequestController::class, 'create'])->name('owner.withdrawal_requests.add');
+    Route::post('/withdrawal_request', [WithdrawRequestController::class, 'store'])->name('owner.withdrawal_requests.store');
+    Route::get('/withdrawal_request/detail/{id}', [WithdrawRequestController::class, 'detail'])->name('owner.withdrawal_requests.detail');
 });
 
 Route::match(['get', 'post'], '/botman', [ChatbotController::class, 'handle']);

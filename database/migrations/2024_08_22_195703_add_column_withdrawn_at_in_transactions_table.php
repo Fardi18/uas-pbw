@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('withdraw_requests', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('bengkel_id')->constrained('bengkels')->onDelete('cascade');
-            $table->decimal('amount', 10, 2);
-            $table->enum('status', ['pending', 'transferred'])->default('pending');
-            $table->timestamps();
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->timestamp('withdrawn_at')->nullable();
+            $table->string('image')->nullable();
         });
     }
 
@@ -29,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('withdraw_requests');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->dropColumn('withdrawn_at');
+            $table->dropColumn('image');
+        });
     }
 };
