@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     public function listuser(Request $request)
     {
-        $data['users'] = User::all();
+        $data['users'] = User::orderBy('created_at', 'desc')->get();
         return view('admin/listuser', $data);
     }
 
@@ -44,7 +44,7 @@ class AdminController extends Controller
 
     public function listowner()
     {
-        $data['pemilik_bengkel'] = PemilikBengkel::all();
+        $data['pemilik_bengkel'] = PemilikBengkel::orderBy('created_at', 'desc')->get();
         return view('admin/listowner', $data);
     }
 
@@ -64,7 +64,7 @@ class AdminController extends Controller
 
     public function listbengkel()
     {
-        $data['bengkels'] = Bengkel::all();
+        $data['bengkels'] = Bengkel::orderBy('created_at', 'desc')->get();
         return view('admin/listbengkel', $data);
     }
 
@@ -84,7 +84,7 @@ class AdminController extends Controller
     public function listbooking()
     {
         $bookings = Booking::with(['user', 'bengkel', 'layanans'])
-            ->get();
+            ->orderBy('created_at', 'desc')->get();
         return view('admin.listbooking', ['bookings' => $bookings]);
     }
 
@@ -100,7 +100,7 @@ class AdminController extends Controller
 
     public function listtransaction()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::orderBy('created_at', 'desc')->get();
 
         return view("admin.listtransaction", compact("transactions"));
     }

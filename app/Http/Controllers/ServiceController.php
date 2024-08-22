@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bengkel;
-use App\Models\Booking;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
-use App\Models\Kendaraan;
-use App\Models\User;
+use App\Models\Specialist;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
     public function index(Request $request)
     {
+        // dd($request->all());
         $keyword = $request->keyword;
         $kecamatan_id = $request->kecamatan_id;
         $kelurahan_id = $request->kelurahan_id;
+        $specialist_id = $request->specialist_id;
 
-        $query = Bengkel::query();
+        $query = Bengkel::with('specialists');
 
         if ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%')
@@ -34,12 +33,29 @@ class ServiceController extends Controller
             $query->where('kelurahan_id', $kelurahan_id);
         }
 
+
+        if ($specialist_id) {
+            $query->whereHas('specialists', function ($q) use ($specialist_id) {
+                $q->where(
+                    'specialist_id',
+                    $specialist_id
+                );
+            });
+        }
+
         $bengkels = $query->get();
         $kecamatans = Kecamatan::all();
         $kelurahans = Kelurahan::all();
+        $specialists = Specialist::all();
 
-        return view('user/servicepage', ['bengkels' => $bengkels, 'kecamatans' => $kecamatans, 'kelurahans' => $kelurahans]);
+        return view('user/servicepage', [
+            'bengkels' => $bengkels,
+            'kecamatans' => $kecamatans,
+            'kelurahans' => $kelurahans,
+            'specialists' => $specialists
+        ]);
     }
+
 
 
     public function getKelurahans($kecamatan_id)
@@ -51,7 +67,7 @@ class ServiceController extends Controller
 
     public function detailBengkel($id)
     {
-        $bengkel['bengkels'] = Bengkel::with(['layanans', 'jadwals', 'products', 'kecamatan', 'kelurahan'])
+        $bengkel['bengkels'] = Bengkel::with(['layanans', 'jadwals', 'products', 'kecamatan', 'kelurahan', 'specialists'])
             ->findOrFail($id);
         return view('user/detailbengkelpage', ['bengkels' => $bengkel]);
     }

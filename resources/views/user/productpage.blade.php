@@ -4,52 +4,50 @@
 
 @section('content')
     {{-- hero --}}
-    <div class="hero d-flex align-items-center">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="text-white fw-bold mb-4">Product Kami</h1>
-                    <p class="text-white mb-5 text-opacity-75">
-                        Berikut adalah produk yang bisa kami tawarkan untuk Anda
-                    </p>
+    <!-- Start Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Product</h1>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- service --}}
-    <div class="service">
+    <!-- End Hero Section -->
+    <section class="">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class=" text-center">
-                        <h3 class="title">Mau Beli Apa Hari Ini?</h3>
-                    </div>
+            <div class="row d-flex justify-content-between align-items-center">
+                <div class="col col-lg-4">
+                    <h3>Cari produk kebutuhan kendaraanmu disini</h3>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-center align-items-center">
-                <div class="col col-lg-8">
+                <div class="col col-lg-4">
                     <form action="" method="GET">
                         @csrf
                         <input type="text" class="form-control" placeholder="Cari produk disini" name="keyword">
                     </form>
                 </div>
             </div>
+        </div>
+    </section>
+    {{-- service --}}
+    <div class="untree_co-section product-section before-footer-section">
+        <div class="container">
             <div class="row row-cols-1 row-cols-md-3 g-4 bengkel">
                 @foreach ($products as $product)
-                    <div class="col">
-                        <div class="card">
-                            <img src="{{ asset('images/' . $product->image) }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="card-title">{{ $product->name }}</h5>
-                                    <h6>Rp{{ $product->price }}</h6>
-                                </div>
-                                <p class="text-secondary">Stock: {{ $product->stock }}</p>
-                                <a href="/detailproductpage/{{ $product->id }}" class="btn btn-primary w-100">Lihat
-                                    Product</a>
-                            </div>
-                        </div>
+                    <div class="col-12 col-md-4 col-lg-3 mb-5">
+                        <a class="product-item" href="/detailproductpage/{{ $product->id }}">
+                            <img src="{{ asset('images/' . $product->image) }}" class="img-fluid product-thumbnail"
+                                style="height: 280px; object-fit: cover">
+                            <h3 class="product-title">{{ $product->name }}</h3>
+                            <strong class="product-price">Rp{{ number_format($product->price) }}</strong>
+
+                            <span class="icon-cross" href="/detailproductpage/{{ $product->id }}">
+                                <img src="{{ asset('/user-tamplate/images/cross.svg') }}" class="img-fluid">
+                            </span>
+                        </a>
                     </div>
                 @endforeach
             </div>

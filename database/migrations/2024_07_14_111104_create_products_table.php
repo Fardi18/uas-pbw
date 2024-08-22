@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('bengkel_id');
             $table->foreign('bengkel_id')->references('id')->on('bengkels')->onDelete('cascade');
             $table->integer('price');
+            $table->integer('weight');
             $table->integer('stock');
             $table->timestamps();
         });

@@ -3,7 +3,17 @@
 @section('title', 'Pesan Bengkel')
 
 @section('content')
-
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-12">
+                    <div class="">
+                        <h1>Halaman Pemesanan <br> {{ $bengkel->name }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="mb-xl-5 pesan">
         <div class="pesan-bengkel">
             <div class="container my-3 p-5">
@@ -96,10 +106,20 @@
                     <div class="row g-4 pesan">
                         <div class="col mb-3">
                             <label for="waktu_booking" class="form-label">Tanggal Service</label>
-                            <input type="datetime-local"
-                                class="form-control w-100 @error('waktu_booking') is-invalid @enderror" id="waktu_booking"
-                                name="waktu_booking">
-                            <i class="text-secondary">* Pilih waktu dan tanggal booking sesuai dengan waktu
+                            <input type="date" class="form-control w-100 @error('waktu_booking') is-invalid @enderror"
+                                id="tanggal_booking" name="tanggal_booking">
+                            <i class="text-secondary">* Pilih tanggal booking yang sesuai</i>
+                            @error('tanggal_booking')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col mb-3">
+                            <label for="waktu_booking" class="form-label">Waktu Service</label>
+                            <input type="time" class="form-control w-100 @error('waktu_booking') is-invalid @enderror"
+                                id="waktu_booking" name="waktu_booking">
+                            <i class="text-secondary">* Pilih waktu booking sesuai dengan waktu
                                 operasional Bengkel</i>
                             @error('waktu_booking')
                                 <div class="alert alert-danger mt-2">
@@ -112,7 +132,7 @@
 
                 <div class="mb-5">
                     <label for="catatan_tambahan" class="form-label">Catatan Tambahan</label>
-                    <textarea class="form-control" id="catatan_tambahan" name="catatan_tambahan" rows="3"
+                    <textarea class="form-control" id="catatan_tambahan" name="catatan_tambahan" rows="5"
                         placeholder="Tambahkan catatan tambahan disini"></textarea>
                 </div>
                 <div class="col-lg-12 d-flex justify-content-end">
@@ -126,3 +146,35 @@
 
 
 @endsection
+
+@push('javascript')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookingInput = document.getElementById('waktu_booking');
+            const dateInput = document.getElementById('tanggal_booking');
+
+            function fetchBookedTimes() {
+                const bengkelId = document.querySelector('input[name="bengkel_id"]').value;
+                const selectedDate = dateInput.value;
+
+                fetch(`/api/bengkel/${bengkelId}/booked-times?date=${selectedDate}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const disabledTimes = data.map(booking => booking.waktu_booking.slice(0,
+                        5)); // Get time part only
+
+                        bookingInput.addEventListener('input', function() {
+                            const selectedTime = bookingInput.value;
+                            if (disabledTimes.includes(selectedTime)) {
+                                alert(
+                                    'Waktu ini sudah dipesan oleh user lain. Silakan pilih waktu lain.');
+                                bookingInput.value = ''; // Reset input waktu_booking
+                            }
+                        });
+                    });
+            }
+
+            dateInput.addEventListener('change', fetchBookedTimes);
+        });
+    </script>
+@endpush

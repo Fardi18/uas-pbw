@@ -1,22 +1,39 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BengkelBookingController;
 use App\Http\Controllers\BengkelController;
+use App\Http\Controllers\BengkelTransactionController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\LayananController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\LayananController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileUserController;
+<<<<<<< HEAD
 use App\Http\Controllers\BengkelBookingController;
 use App\Http\Controllers\BengkelTransactionController;
 use App\Http\Controllers\ChatbotController;
+=======
+use App\Http\Controllers\ServiceController;
+
+use App\Http\Controllers\WithdrawRequestController;
+use App\Models\PemilikBengkel;
+use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+
+
+>>>>>>> main
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +46,7 @@ use App\Http\Controllers\ChatbotController;
 |
 */
 
-
-Route::get('/', function () {
-    return view('user.landingpage');
-});
+Route::get('/', [PageController::class, 'home']);
 Route::get('/servicepage', [ServiceController::class, 'index']);
 Route::get('/kelurahan/{kecamatan_id}', [ServiceController::class, 'getKelurahans']);
 Route::get('/detailbengkelpage/{id}', [ServiceController::class, 'detailBengkel']);
@@ -50,6 +64,81 @@ Route::get('/ownerregister', [AuthController::class, "ownerregister"])->name('ow
 Route::post('/userregister', [AuthController::class, "douserregister"])->name('do.userregister');
 Route::post('/ownerregister', [AuthController::class, "doownerregister"])->name('do.ownerregister');
 
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $user = User::where('email', $request->email)->first();
+    $owner = PemilikBengkel::where('email', $request->email)->first();
+
+    if ($user) {
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+    } elseif ($owner) {
+        $status = Password::broker('owners')->sendResetLink(
+            $request->only('email')
+        );
+    } else {
+        $status = Password::INVALID_USER;
+    }
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+    $owner = PemilikBengkel::where('email', $request->email)->first();
+
+    if ($user) {
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+    } elseif ($owner) {
+        $status = Password::broker('owners')->reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (PemilikBengkel $owner, string $password) {
+                $owner->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+
+                $owner->save();
+
+                event(new PasswordReset($owner));
+            }
+        );
+    } else {
+        $status = Password::INVALID_USER;
+    }
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->middleware('guest')->name('password.update');
 
 // USER
 Route::middleware(['auth:web'])->group(function () {
@@ -64,6 +153,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/profile-booking/{id}', [ProfileUserController::class, 'showBooking']);
     Route::get('/booking/add/{id}', [ServiceController::class, 'bookingPage']);
     Route::post('/booking', [BookingController::class, 'booking']);
+    Route::get('/api/bengkel/{bengkel}/booked-times', [BookingController::class, 'getBookedTimes']);
     // Transaction
     Route::get('/profile-transaction', [ProfileUserController::class, 'transactionList']);
     Route::get('/profile-transaction/{transaction}', [ProfileUserController::class, 'showTransaction'])->name('customer.show.transaction');
@@ -71,7 +161,11 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/{product}', [CartController::class, 'addToCart'])->name('add_toCart');
     Route::patch('/cart/{cart}', [CartController::class, 'updateCart'])->name('update_cart');
-    Route::delete('/cart/{cart}', [CartController::class, 'deleteCart'])->name('delete_cart');
+    // Route::delete('/cart/{cart}', [CartController::class, 'deleteCart'])->name('delete_cart');
+
+    Route::delete('/cart/{cart}/delete', [CartController::class, 'deleteCart'])->name('delete_cart');
+
+
     // Checkout
     Route::get('/checkout-page', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
     Route::post('/checkout', [CheckoutController::class, 'checkoutProcess'])->name('checkout.process');
@@ -80,19 +174,27 @@ Route::middleware(['auth:web'])->group(function () {
 // ADMIN
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin-index', [AdminController::class, 'index'])->name('adminindex');
+    // user
     Route::get('/admin-listuser', [AdminController::class, 'listuser'])->name('showlistuser');
-    Route::get('/admin-listbengkel', [AdminController::class, 'listbengkel'])->name('showlistbengkel');
-    Route::get('/admin-listowner', [AdminController::class, 'listowner'])->name('showlistowner');
-    Route::get('/admin-listbooking', [AdminController::class, 'listbooking'])->name('showlistbooking');
     Route::get('/admin-detailuser/{id}', [AdminController::class, 'detailuser'])->name('detailuser');
-    Route::get('/admin-detailowner/{id}', [AdminController::class, 'detailowner'])->name('detailowner');
-    Route::get('/admin-detailbengkel/{id}', [AdminController::class, 'detailbengkel'])->name('detailbengkel');
-    Route::get('/admin-detailbooking/{id}', [AdminController::class, 'detailbooking'])->name('detailbooking');
-    Route::get('/admin-listowner/{id}/delete', [AdminController::class, 'destroyowner'])->name('deletelistowner');
     Route::get('/admin-listuser/{id}/delete', [AdminController::class, 'destroyuser'])->name('deletelistuser');
+    // owner
+    Route::get('/admin-listowner', [AdminController::class, 'listowner'])->name('showlistowner');
+    Route::get('/admin-detailowner/{id}', [AdminController::class, 'detailowner'])->name('detailowner');
+    Route::get('/admin-listowner/{id}/delete', [AdminController::class, 'destroyowner'])->name('deletelistowner');
+    // bengkel
+    Route::get('/admin-listbengkel', [AdminController::class, 'listbengkel'])->name('showlistbengkel');
+    Route::get('/admin-detailbengkel/{id}', [AdminController::class, 'detailbengkel'])->name('detailbengkel');
     Route::get('/admin-listbengkel/{id}/delete', [AdminController::class, 'destroybengkel'])->name('deletelistbengkel');
+    // booking
+    Route::get('/admin-listbooking', [AdminController::class, 'listbooking'])->name('showlistbooking');
+    Route::get('/admin-detailbooking/{id}', [AdminController::class, 'detailbooking'])->name('detailbooking');
+    // transaction
     Route::get('/admin-transaction', [AdminController::class, 'listtransaction'])->name('showlisttransaction');
     Route::get('/admin-transaction/{transaction}', [AdminController::class, 'detailtransaction'])->name('admin.show.transaction');
+
+    Route::get('/admin-withdrawal_requests', [WithdrawRequestController::class, 'index'])->name('admin.withdrawal_requests.index');
+    Route::put('/admin-withdrawal_requests/{id}', [WithdrawRequestController::class, 'updateStatus'])->name('admin.withdrawal_requests.updateStatus');
 });
 
 // BENGKEL
@@ -141,8 +243,15 @@ Route::prefix('/owner')->middleware('auth:owner')->group(function () {
     Route::post('/transaction/{id}', [BengkelTransactionController::class, 'addToCart'])->name('add.to.cart');
     Route::delete('/transaction/cart/{id}', [BengkelTransactionController::class, 'removeFromCart'])->name('remove.from.cart');
     Route::post('/checkout/process/owner', [BengkelTransactionController::class, 'checkoutProcessForOwner'])->name('checkout.process.owner');
+
+
+    Route::get('/withdrawal_requests', [WithdrawRequestController::class, 'index'])->name('pemilik_bengkel.withdrawal_requests.index');
+    Route::post('/withdrawal_requests', [WithdrawRequestController::class, 'store'])->name('pemilik_bengkel.withdrawal_requests.store');
 });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
 Route::match(['get', 'post'], '/botman', [ChatbotController::class, 'handle']);

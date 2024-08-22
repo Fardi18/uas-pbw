@@ -41,6 +41,7 @@ class LayananBengkelConversation extends Conversation
 
     protected function askCategory()
     {
+<<<<<<< HEAD
         $this->ask('Silakan pilih cari bengkel berdasarkan kecamatan', function (Answer $answer) {
             $kecamatan = $answer->getText();
             $this->showKecamatan($kecamatan);
@@ -54,6 +55,55 @@ class LayananBengkelConversation extends Conversation
 
         if ($kecamatan) {
             $this->say("ID Kecamatan: " . $kecamatan->id . " - Nama: " . $kecamatan->name);
+=======
+        // $this->listKecamatan();
+        $this->ask('Silakan ketik nama kecamatan anda di kota Tangerang Selatan', function (Answer $answer) {
+            $kecamatan = $answer->getText();
+            $this->showKecamatan($kecamatan);
+            // $this->listKecamatan();
+        });
+    }
+
+    protected function listKecamatan()
+    {
+        // Ambil semua kecamatan dari database
+        $kecamatanList = kecamatan::all();
+        dd($kecamatanList);
+
+        if ($kecamatanList->isNotEmpty()) {
+            $this->say("Daftar Kecamatan yang tersedia:");
+
+            // Loop melalui setiap kecamatan dan tampilkan namanya
+            foreach ($kecamatanList as $kecamatan) {
+                $this->say("- " . $kecamatan->name);
+            }
+
+            // Minta pengguna untuk memilih salah satu kecamatan
+            $this->ask('Silakan ketik nama kecamatan untuk melihat detail lebih lanjut atau ketik "Kembali ke Menu Utama" untuk kembali.', function (Answer $answer) {
+                $kecamatanName = $answer->getText();
+
+                if (strtolower($kecamatanName) == 'kembali ke menu utama') {
+                    // Kembali ke menu utama atau pilihan lain
+                    $this->askCategory();
+                } else {
+                    $this->showKecamatan($kecamatanName);
+                }
+            });
+        } else {
+            $this->say("Tidak ada kecamatan yang ditemukan.");
+        }
+    }
+
+
+    protected function showKecamatan($text)
+    {
+        // Contoh pencarian kecamatan berdasarkan nama
+        $kecamatan = kecamatan::where('name', 'like', '%' . $text . '%')->first();
+
+        if ($kecamatan) {
+            // $this->say("ID Kecamatan: " . $kecamatan->id . " - Nama: " . $kecamatan->name);
+            $this->say(" - Nama Kecamatan Anda: " . $kecamatan->name);
+>>>>>>> main
             $this->showKelurahan($kecamatan->id);
             // Lanjutkan ke proses selanjutnya jika diperlukan
         } else {
@@ -96,10 +146,17 @@ class LayananBengkelConversation extends Conversation
                 // $url = "http://127.0.0.1:8001/detailbengkelpage/" . $bengkel->id;
                 $url = url('/detailbengkelpage/' . $bengkel->id);
                 $link = '<a href="' . $url . '" target="_blank">Kunjungi Situs</a>';
+<<<<<<< HEAD
                 $this->say("- " . $bengkel->name . ", Alamat: " . $bengkel->alamat . ", " . $link);
             }
         } else {
             $this->say("Tidak ada bengkel yang ditemukan di kelurahan ini.");
+=======
+                $this->say("Nama Bengkel : " . $bengkel->name . "<br>Alamat Bengkel : " . $bengkel->alamat . "<br>" . $link . "<br> Untuk ke menu awal ketik 0");
+            }
+        } else {
+            $this->say("Tidak ada bengkel yang ditemukan di kelurahan ini. kemudian ketik 0 untuk kembali");
+>>>>>>> main
         }
     }
 }

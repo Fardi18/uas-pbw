@@ -28,12 +28,20 @@ class ChatbotController extends Controller
                     // bot -> conversation 
                     $bot->startConversation(new LayananBengkelConversation());
                 } else if ($message == "3") {
+<<<<<<< HEAD
                     // bot conversation cara mendaftar akun
+=======
+                    $this->inforRegister($bot);
+>>>>>>> main
                 } else if ($message == "0") {
                     $this->showMainMenu($bot);
                 }
             } else {
+<<<<<<< HEAD
                 $bot->reply('Harap masukkan angka pilihan diatas');
+=======
+                $bot->reply('Harap masukkan angka pilihan diatas atau ketik 0 untuk kembali');
+>>>>>>> main
             }
         });
 
@@ -48,6 +56,7 @@ class ChatbotController extends Controller
     }
 
 
+<<<<<<< HEAD
 
 
     // Menampilkan menu utama
@@ -111,13 +120,20 @@ class ChatbotController extends Controller
     // }
 
 
+=======
+>>>>>>> main
     // // Menampilkan menu Pengiriman Produk
     public function showPengirimanProdukMenu(BotMan $bot)
     {
         $message = "Layanan Pengiriman Produk:\n" .
+<<<<<<< HEAD
             "1. Informasi Pengiriman\n" .
             "2. Cara Mengubah Alamat Pengiriman\n" .
             "Ketik salah satu dari opsi di atas atau ketik 'Kembali ke Menu Utama' untuk kembali.";
+=======
+            "1. Informasi pickup\n" .
+            "2. Informasi jasa kurir\n";
+>>>>>>> main
 
         $bot->reply($message);
 
@@ -125,10 +141,42 @@ class ChatbotController extends Controller
             // $bot->say('Welcome ' . $answer->getText());
             $selectedOption = $answer->getText();
 
+<<<<<<< HEAD
             if (strtolower($selectedOption) === 'informasi pengiriman') {
                 $bot->say('Informasi mengenai pengiriman...');
             } elseif (strtolower($selectedOption) === 'cara mengubah alamat pengiriman') {
                 $bot->say('Informasi mengenai cara mengubah alamat pengiriman...');
+=======
+            if (strtolower($selectedOption) === '1') {
+                // $bot->say('Informasi mengenai pengiriman...');
+                $bot->say(
+                    "❗️(INFO PICKUP BARANG DITEMPAT)❗️<br><br>" .
+                        "1. Konsumen dapat langsung mengambil barang tanpa menunggu pengiriman.<br>" .
+                        "2. Tidak ada biaya tambahan untuk pengiriman.<br>" .
+                        "3. Konsumen dapat memeriksa kondisi barang sebelum membawanya.<br><br>" .
+                        "🛑Persyaratan Ambil di Tempat<br>" .
+                        "1. Bawa tanda terima atau nomor pesanan saat mengambil barang.<br>" .
+                        "2. Datang pada waktu yang dijanjikan untuk pengambilan.<br>" .
+                        "3. Lokasi pengambilan di toko, gudang, atau cabang penjual.<br><br>" .
+                        "🛑Waktu Pengambilan<br>" .
+                        "1. Disesuaikan dengan jam operasional toko/gudang.<br>" .
+                        "2. Hubungi penjual untuk memastikan waktu dan kondisi.<br>"
+                );
+            } elseif (strtolower($selectedOption) === '2') {
+                $bot->say(
+                    "❗️(INFO PENGIRIMAN JASA KURIR)❗️<br><br>" .
+                        "1. Barang diantar langsung ke alamat.<br>" .
+                        "2. Lacak status pengiriman.<br>" .
+                        "3. Waktu pengiriman cepat.<br><br>" .
+                        "🛑Biaya Pengiriman Kurir<br>" .
+                        "1. Bervariasi tergantung jarak, berat, dan ukuran.<br>" .
+                        "2. Tarif flat atau berlangganan.<br>" .
+                        "3. Bandingkan beberapa jasa kurir.<br><br>" .
+                        "🛑Pilihan Layanan Kurir<br>" .
+                        "1. Sesuai kebutuhan, seperti reguler, cepat, atau same-day delivery.<br>" .
+                        "2. Layanan asuransi pengiriman."
+                );
+>>>>>>> main
             } else {
                 $bot->say('Pilihan tidak valid. Kembali ke Menu Utama.');
                 $this->showMainMenu($bot);
@@ -136,6 +184,7 @@ class ChatbotController extends Controller
         });
     }
 
+<<<<<<< HEAD
     // // Menampilkan menu Layanan Bengkel
     // public function showLayananBengkelMenu(BotMan $bot)
     // {
@@ -167,4 +216,18 @@ class ChatbotController extends Controller
     //     $bot->reply('Informasi mengenai cara mendaftar akun...');
     //     $this->showMainMenu($bot);
     // }
+=======
+    public function inforRegister(BotMan $bot)
+    {
+        $url = url("/userregister/");
+        $link = '<a href="' . $url . '" target="_blank">Klik ini untuk Register</a>';
+        $message = "❗️ (INFO REGISTRASI AKUN)❗️<br><br>" .
+            "1.⁠ ⁠Kunjungi " . $link . "<br>" .
+            "2.⁠ ⁠Isi formulir registrasi dengan informasi yang diminta.<br>" .
+            "3.⁠ ⁠Lakukan verifikasi identitas jika diperlukan.<br>" .
+            "4.⁠ ⁠Konfirmasi registrasi dengan mengklik \"Daftar\" atau \"Buat Akun\"";
+
+        $bot->reply($message);
+    }
+>>>>>>> main
 }

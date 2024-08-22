@@ -46,7 +46,7 @@
                                         {{ $layanan->name }}
                                     </td>
                                     <td>
-                                        {{ $layanan->price }}
+                                        Rp {{ number_format($layanan->price) }}
                                     </td>
                                     <td>
                                         <a href="/owner/layanan/{{ $layanan->id }}/edit" type="button"

@@ -15,13 +15,27 @@ return new class extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
-            $table->string('senin');
-            $table->string('selasa');
-            $table->string('rabu');
-            $table->string('kamis');
-            $table->string('jumat');
-            $table->string('sabtu');
-            $table->string('minggu');
+            // senin
+            $table->time('senin_buka');
+            $table->time('senin_tutup');
+            // selasa
+            $table->time('selasa_buka');
+            $table->time('selasa_tutup');
+            // rabu
+            $table->time('rabu_buka');
+            $table->time('rabu_tutup');
+            // kamis
+            $table->time('kamis_buka');
+            $table->time('kamis_tutup');
+            // jumat
+            $table->time('jumat_buka');
+            $table->time('jumat_tutup');
+            // sabtu
+            $table->time('sabtu_buka')->nullable();
+            $table->time('sabtu_tutup')->nullable();
+            // minggu
+            $table->time('minggu_buka')->nullable();
+            $table->time('minggu_tutup')->nullable();
             $table->foreignId('bengkel_id');
             $table->foreign('bengkel_id')->references('id')->on('bengkels')->onDelete('cascade');
             $table->timestamps();

@@ -50,25 +50,25 @@
                             @foreach ($jadwals as $jadwal)
                                 <tr>
                                     <td>
-                                        {{ $jadwal->senin }}
+                                        {{ $jadwal->senin_buka }} - {{ $jadwal->senin_tutup }}
                                     </td>
                                     <td>
-                                        {{ $jadwal->selasa }}
+                                        {{ $jadwal->selasa_buka }} - {{ $jadwal->selasa_tutup }}
                                     </td>
                                     <td>
-                                        {{ $jadwal->rabu }}
+                                        {{ $jadwal->rabu_buka }} - {{ $jadwal->rabu_tutup }}
                                     </td>
                                     <td>
-                                        {{ $jadwal->kamis }}
+                                        {{ $jadwal->kamis_buka }} - {{ $jadwal->kamis_tutup }}
                                     </td>
                                     <td>
-                                        {{ $jadwal->jumat }}
+                                        {{ $jadwal->jumat_buka }} - {{ $jadwal->jumat_tutup }}
                                     </td>
                                     <td>
-                                        {{ $jadwal->sabtu }}
+                                        {{ $jadwal->sabtu_buka }} - {{ $jadwal->sabtu_tutup }}
                                     </td>
                                     <td>
-                                        {{ $jadwal->minggu }}
+                                        {{ $jadwal->minggu_buka }} - {{ $jadwal->minggu_tutup }}
                                     </td>
                                     <td>
                                         <a href="/owner/jadwal/{{ $jadwal->id }}/edit" type="button"

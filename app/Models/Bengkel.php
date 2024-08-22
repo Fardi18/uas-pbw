@@ -17,7 +17,7 @@ class Bengkel extends Model
         'pemilik_id',
         'kecamatan_id',
         'kelurahan_id',
-        'link_alamat',
+        // 'specialist_id',
     ];
 
     public function layanans()
@@ -27,7 +27,7 @@ class Bengkel extends Model
 
     public function booking()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasOne(Booking::class);
     }
 
     public function jadwals()
@@ -43,6 +43,12 @@ class Bengkel extends Model
     public function pemilik_bengkel()
     {
         return $this->belongsTo(PemilikBengkel::class);
+    }
+
+    // Relasi many-to-many dengan Specialist
+    public function specialists()
+    {
+        return $this->belongsToMany(Specialist::class, 'bengkel_specialist');
     }
 
     public function kecamatan()

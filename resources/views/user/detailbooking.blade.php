@@ -3,16 +3,20 @@
 @section('title', 'Detail Booking')
 
 @section('content')
-    <section class="service">
-        <div class="container" style="margin-bottom: 200px;">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center my-5">
-                        <h3 class="title">Detail Booking</h3>
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-12">
+                    <div class="">
+                        <h1>Detail Booking #{{ $booking->id }}</h1>
                     </div>
                 </div>
             </div>
-            <div class="row ">
+        </div>
+    </div>
+    <section class="">
+        <div class="container">
+            <div class="row bg-white p-5">
                 <div class="col">
                     <table class="table">
                         <tbody>
@@ -23,6 +27,10 @@
                             <tr>
                                 <th scope="col">Nama Bengkel</th>
                                 <td>{{ $booking->bengkel->name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Tanggal Booking</th>
+                                <td>{{ $booking->tanggal_booking }}</td>
                             </tr>
                             <tr>
                                 <th scope="col">Waktu Booking</th>

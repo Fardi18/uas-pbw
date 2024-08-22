@@ -2,9 +2,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('adminindex') }}"class="brand-link">
-        <img src="{{ asset('/lte') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Bengkelin</span>
+        <img src="{{ asset('css/logo.png') }}" alt="Logo RXS" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light">CARS</span>
     </a>
 
     <!-- Sidebar -->
@@ -12,7 +12,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3">
             <div class="info">
-                <h5 class="text-white" style="margin: 0;"> Bengkelin</h5>
+                <h5 class="text-white" style="margin: 0;"> {{ Auth::user()->name }}</h5>
             </div>
         </div>
 
@@ -78,6 +78,16 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             List Transaction
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.withdrawal_requests.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Withdraw Request
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

@@ -75,9 +75,26 @@ class CartController extends Controller
         return response()->json(['success' => true, 'newPrice' => $cart->product->price * $request->quantity]);
     }
 
+    // public function deleteCart(Cart $cart)
+    // {
+    //     // dd($cart);
+    //     $cart->delete();
+    //     return redirect('/cart');
+    // }
+
+    // public function deleteCart(Request $id)
+    // {
+    //     // dd($id);
+    //     $cart = Cart::findOrFail($id);
+    //     $cart->delete();
+
+    //     return redirect('/cart');
+    // }
+
+
     public function deleteCart(Cart $cart)
     {
         $cart->delete();
-        return redirect('/cart');
+        return response()->json(['success' => true, 'message' => 'Item berhasil dihapus dari keranjang']);
     }
 }

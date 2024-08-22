@@ -37,8 +37,16 @@
                             <p style="margin: 0" class="fw-bold">{{ $booking->id }}</p>
                         </div>
                         <div class="detail-booking d-flex justify-content-between align-items-center">
+                            <p style="margin: 0">Nama Bengkel</p>
+                            <p style="margin: 0" class="fw-bold">{{ $booking->bengkel->name }}</p>
+                        </div>
+                        <div class="detail-booking d-flex justify-content-between align-items-center">
                             <p style="margin: 0">Status</p>
                             <p style="margin: 0" class="fw-bold">{{ $booking->booking_status }}</p>
+                        </div>
+                        <div class="detail-booking d-flex justify-content-between align-items-center">
+                            <p style="margin: 0">Tanggal Booking</p>
+                            <p style="margin: 0" class="fw-bold">{{ $booking->tanggal_booking }}</p>
                         </div>
                         <div class="detail-booking d-flex justify-content-between align-items-center">
                             <p style="margin: 0">Waktu Booking</p>

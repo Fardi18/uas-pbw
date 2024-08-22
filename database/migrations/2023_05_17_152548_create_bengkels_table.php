@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pemilik_id');
             $table->foreign('pemilik_id')->references('id')->on('pemilik_bengkels')->onDelete('cascade');
+            $table->foreignId('specialist_id')->index()->nullable();
             $table->string('name', 100);
             $table->string('image');
             $table->text('description');
             $table->longText('alamat');
-            $table->string('link_alamat');
+            // $table->string('link_alamat');
             $table->timestamps();
         });
     }

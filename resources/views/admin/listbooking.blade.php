@@ -11,7 +11,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/owner">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('admin-index') }}">Home</a></li>
                         <li class="breadcrumb-item active">Booking List</li>
                     </ol>
                 </div><!-- /.col -->
@@ -41,6 +41,8 @@
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Nama Pelanggan</th>
+                                                    <th>Nama Bengkel</th>
+                                                    <th>Tanggal</th>
                                                     <th>Waktu</th>
                                                     <th>Status</th>
                                                     <th>Kendaraan</th>
@@ -53,12 +55,16 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $booking->user->name }}</td>
+                                                        <td>{{ $booking->bengkel->name }}</td>
+                                                        <td>{{ $booking->tanggal_booking }}</td>
                                                         <td>{{ $booking->waktu_booking }}</td>
                                                         <td>{{ $booking->booking_status }}</td>
                                                         <td>{{ $booking->brand }} {{ $booking->model }}</td>
                                                         <td>
                                                             <a href="/admin-detailbooking/{{ $booking->id }}"
-                                                                class="btn btn-warning text-white">Detail</a>
+                                                                class="btn btn-warning text-white">
+                                                                <i class="fa-regular fa-eye"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

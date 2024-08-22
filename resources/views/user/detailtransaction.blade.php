@@ -3,16 +3,20 @@
 @section('title', 'Detail Transaction')
 
 @section('content')
-    <section class="service">
-        <div class="container" style="margin-bottom: 200px;">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center my-5">
-                        <h3 class="title">Detail Transaction</h3>
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-12">
+                    <div class="">
+                        <h1>Detail Transaksi #{{ $transaction->transaction_code }}</h1>
                     </div>
                 </div>
             </div>
-            <div class="row">
+        </div>
+    </div>
+    <section class="">
+        <div class="container">
+            <div class="row bg-white p-5">
                 <div class="col">
                     <table class="table">
                         <tbody>
@@ -47,7 +51,7 @@
                             </tr>
                             <tr>
                                 <th scope="col">Grand Total</th>
-                                <td>Rp{{ number_format($transaction->grand_total) }}</td>
+                                <td><strong>Rp{{ number_format($transaction->grand_total) }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -58,6 +62,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Nama Produk / Layanan</th>
                                 <th scope="col">Kuantitas</th>
+                                <th scope="col">Total Berat</th>
                                 <th scope="col">Sub Total</th>
                             </tr>
                         </thead>
@@ -68,6 +73,9 @@
                                     <td>{{ $detail->product ? $detail->product->name : ($detail->layanan ? $detail->layanan->name : 'N/A') }}
                                     </td>
                                     <td>{{ $detail->qty }}</td>
+                                    <td>
+                                        {{ $detail->product ? $detail->product->weight * $detail->qty . ' kg' : 'N/A' }}
+                                    </td>
                                     <td>Rp{{ number_format($detail->product ? $detail->product_price * $detail->qty : $detail->layanan_price * $detail->qty) }}
                                     </td>
                                 </tr>

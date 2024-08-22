@@ -3,30 +3,20 @@
 @section('title', 'Service')
 
 @section('content')
-    {{-- hero --}}
-    <div class="hero d-flex align-items-center">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="text-white fw-bold mb-4">Layanan Kami</h1>
-                    <p class="text-white mb-5 text-opacity-75">
-                        Berikut adalah layanan yang bisa kami berikan untuk Anda
-                    </p>
+    {{-- service --}}
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Service</h1>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- service --}}
-    <div class="service">
+    {{-- <section class="search">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center">
-                        <h3 class="title">Mau Service Apa Hari Ini?</h3>
-                    </div>
-                </div>
-            </div>
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
                     <form id="filter-form" action="" method="GET">
@@ -47,22 +37,65 @@
                             <option selected>-- Pilih Kelurahan --</option>
                         </select>
                     </div>
+                    <select class="form-select" id="specialist" name="specialist_id" aria-label="Default select example">
+                        <option selected>-- Pilih Spesialis --</option>
+                        @foreach ($specialists as $specialist)
+                            <option value="{{ $specialist->id }}">{{ $specialist->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
+        </div>
+    </section> --}}
+    <section class="search">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col col-lg-8">
+                    <form id="filter-form" action="" method="GET">
+                        @csrf
+                        <input type="text" class="form-control" placeholder="Cari bengkel disini" name="keyword">
+                        <input type="hidden" id="kecamatan-id" name="kecamatan_id">
+                        <input type="hidden" id="kelurahan-id" name="kelurahan_id">
+                        <input type="hidden" id="specialist-id" name="specialist_id">
+                    </form>
+                    <div class="d-flex align-items-center justify-content-between my-3">
+                        <select class="form-select" id="kecamatan" aria-label="Default select example">
+                            <option selected>-- Pilih Kecamatan --</option>
+                            @foreach ($kecamatans as $kecamatan)
+                                <option value="{{ $kecamatan->id }}">{{ $kecamatan->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="mx-1"></div>
+                        <select class="form-select" id="kelurahan" aria-label="Default select example">
+                            <option selected>-- Pilih Kelurahan --</option>
+                        </select>
+                    </div>
+                    <select class="form-select" id="specialist" aria-label="Default select example">
+                        <option selected>-- Pilih Spesialis --</option>
+                        @foreach ($specialists as $specialist)
+                            <option value="{{ $specialist->id }}">{{ $specialist->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="untree_co-section product-section before-footer-section">
+        <div class="container">
             <div class="row row-cols-1 row-cols-md-3 g-4 bengkel">
                 @foreach ($bengkels as $bengkel)
-                    <div class="col">
-                        <div class="card">
-                            <img src="{{ asset('images/' . $bengkel->image) }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $bengkel->name }}</h5>
-                                <div class="d-flex align-items-center location">
-                                    <img src="{{ asset('css/icon-location.png') }}">
-                                    <p>{{ $bengkel->alamat }}</p>
-                                </div>
-                                <a href="/detailbengkelpage/{{ $bengkel->id }}" class="btn btn-primary">Lihat Bengkel</a>
-                            </div>
-                        </div>
+                    <div class="col-12 col-md-4 col-lg-3 mb-5">
+                        <a class="product-item" href="/detailbengkelpage/{{ $bengkel->id }}">
+                            <img src="{{ asset('images/' . $bengkel->image) }}" class="img-fluid product-thumbnail w-100"
+                                style="height: 280px; object-fit: cover">
+                            <h3 class="product-title">{{ $bengkel->name }}</h3>
+                            <span class="fw-bold">
+                                {{ $bengkel->specialists->pluck('name')->join(', ') }}
+                            </span>
+                            <span class="icon-cross" href="/detailbengkelpage/{{ $bengkel->id }}">
+                                <img src="{{ asset('/user-tamplate/images/cross.svg') }}" class="img-fluid">
+                            </span>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -92,6 +125,12 @@
         document.getElementById('kelurahan').addEventListener('change', function() {
             var kelurahanId = this.value;
             document.getElementById('kelurahan-id').value = kelurahanId;
+            document.getElementById('filter-form').submit();
+        });
+
+        document.getElementById('specialist').addEventListener('change', function() {
+            var specialistId = this.value;
+            document.getElementById('specialist-id').value = specialistId;
             document.getElementById('filter-form').submit();
         });
     </script>

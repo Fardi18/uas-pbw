@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Detail Bengkel')
+{{-- @section('title', 'Dashboard Admin') --}}
 
 @section('content')
     <section class="content">

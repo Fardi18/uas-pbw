@@ -3,183 +3,289 @@
 @section('title', 'Cart')
 
 @section('content')
-    <section class="h-100 h-custom cart">
-        <div class="container py-5 h-100">
-            <div class="row mb-5">
-                <div class="col text-center">
-                    <h2>Keranjang</h2>
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Cart</h1>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+
                 </div>
             </div>
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col">
-                    <div class="card" style="border: none;">
-                        <div class="card-body p-4">
-                            <div class="row">
-                                @if ($carts->isEmpty())
-                                    <div class="text-center">
-                                        <h5>Tidak ada produk dalam keranjang.</h5>
-                                    </div>
-                                @else
-                                    <div class="col-lg-9">
-                                        <div class="card mb-3">
-                                            <div class="card-body">
-                                                @foreach ($carts as $cart)
-                                                    <div class="product d-flex justify-content-between">
-                                                        <div class="d-flex flex-row align-items-center pb-3">
-                                                            <div class="ms-lg-5">
-                                                                <img src="{{ asset('images/' . $cart->product->image) }}"
-                                                                    class="img-fluid rounded-3" alt="Shopping item"
-                                                                    style="width: 400px" />
-                                                            </div>
-                                                            <div class="ms-5">
-                                                                <h4>{{ $cart->product->name }}</h4>
-                                                                <div class="d-flex flex-column mt-3">
-                                                                    <p class="fs-5 text-start">
-                                                                        Rp
-                                                                        <span class="product-price"
-                                                                            data-price="{{ $cart->product->price }}">
-                                                                            {{ number_format($cart->product->price * $cart->quantity) }}
-                                                                        </span>
-                                                                    </p>
-                                                                    <div class="d-flex flex-row align-items-center">
-                                                                        {{-- hapus item --}}
-                                                                        <form action="{{ route('update_cart', $cart) }}"
-                                                                            method="post">
-                                                                            @method('delete')
-                                                                            @csrf
-                                                                            <button class="btn fs-4 me-3">
-                                                                                <i class="fa-solid fa-trash-can"></i>
-                                                                            </button>
-                                                                        </form>
-                                                                        {{-- update quantity item --}}
-                                                                        <div class="d-flex align-items-center">
-                                                                            <button
-                                                                                class="btn btn-outline-secondary quantity-decrease"
-                                                                                data-cart-id="{{ $cart->id }}">-</button>
-                                                                            <input type="number"
-                                                                                class="form-control mx-2 quantity-input"
-                                                                                name="quantity" id="quantity"
-                                                                                value="{{ $cart->quantity }}"
-                                                                                data-cart-id="{{ $cart->id }}"
-                                                                                style="width: 100px;" />
-                                                                            <button
-                                                                                class="btn btn-outline-secondary quantity-increase"
-                                                                                data-cart-id="{{ $cart->id }}">+</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+        </div>
+    </div>
+    <div class="untree_co-section before-footer-section">
+        @if ($carts->isEmpty())
+            <div class="text-center">
+                <h5>Tidak ada produk dalam keranjang.</h5>
+            </div>
+        @else
+            <div class="container">
+
+                <div class="row mb-5">
+                    <form class="col-md-12" method="post">
+                        <div class="site-blocks-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Image</th>
+                                        <th class="product-name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-remove">Remove</th>
+                                    </tr>
+                                </thead>
+                                {{-- <tbody>
+                                    @foreach ($carts as $cart)
+                                        <tr>
+                                            <td class="product-thumbnail">
+                                                <img src="{{ asset('images/' . $cart->product->image) }}" alt="Image"
+                                                    class="img-fluid">
+                                            </td>
+                                            <td class="product-name">
+                                                <h2 class="h5 text-black">{{ $cart->product->name }}</h2>
+                                            </td>
+                                            <td class="product-price">
+                                                <p class="price">
+                                                    Rp{{ number_format($cart->product->price * $cart->quantity) }}</p>
+                                            </td>
+                                            <td>
+                                                <div class="input-group mb-3 d-flex align-items-center quantity-container"
+                                                    style="max-width: 120px;">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-outline-black decrease" type="button"
+                                                            data-price="{{ $cart->product->price }}">&minus;</button>
                                                     </div>
-                                                    <hr>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="card rounded-3">
-                                            <div class="card-body">
-                                                <div>
-                                                    <h5 class="mb-3">Ringkasan Belanja</h5>
+                                                    <input type="text" class="form-control text-center quantity-amount"
+                                                        value="{{ $cart->quantity }}" placeholder=""
+                                                        aria-label="Example text with button addon"
+                                                        aria-describedby="button-addon1"
+                                                        data-price="{{ $cart->product->price }}">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-black increase" type="button"
+                                                            data-price="{{ $cart->product->price }}">&plus;</button>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <p class="mb-2">Subtotal</p>
-                                                    <p class="mb-2">Rp <span
-                                                            id="cart-subtotal">{{ number_format($carts->sum(fn($cart) => $cart->product->price * $cart->quantity)) }}</span>
-                                                    </p>
+
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('update_cart', $cart) }}" method="post">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn fs-4 me-3">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody> --}}
+                                <tbody>
+                                    @foreach ($carts as $cart)
+                                        <tr data-cart-id="{{ $cart->id }}">
+                                            <td class="product-thumbnail">
+                                                <img src="{{ asset('images/' . $cart->product->image) }}" alt="Image"
+                                                    class="img-fluid">
+                                            </td>
+                                            <td class="product-name">
+                                                <h2 class="h5 text-black">{{ $cart->product->name }}</h2>
+                                            </td>
+                                            <td class="product-price">
+                                                <p class="price">
+                                                    Rp{{ number_format($cart->product->price * $cart->quantity) }}</p>
+                                            </td>
+                                            <td>
+                                                <div class="input-group mb-3 d-flex align-items-center quantity-container"
+                                                    style="max-width: 120px;">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-outline-black decrease" type="button"
+                                                            data-price="{{ $cart->product->price }}">&minus;</button>
+                                                    </div>
+                                                    <input type="text" class="form-control text-center quantity-amount"
+                                                        value="{{ $cart->quantity }}" placeholder=""
+                                                        aria-label="Example text with button addon"
+                                                        aria-describedby="button-addon1"
+                                                        data-price="{{ $cart->product->price }}">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-black increase" type="button"
+                                                            data-price="{{ $cart->product->price }}">&plus;</button>
+                                                    </div>
                                                 </div>
-                                                <hr class="mt-3" />
-                                                <a href="{{ route('checkout.page') }}"
-                                                    class="btn btn-primary btn-md w-100">
-                                                    Lanjutkan Pembelian
-                                                </a>
-                                            </div>
-                                        </div>
+                                            </td>
+                                            {{-- <td>
+                                                <form action="{{ route('delete_cart', $cart) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn fs-4 me-3">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </form>
+                                            </td> --}}
+                                            <td>
+                                                <button type="button" class="btn fs-4 me-3 delete-cart-item">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 pl-5">
+                        <div class="row justify-content-end">
+                            <div class="col-md-6 justify-content-end">
+                                <div class="row">
+                                    <div class="col-md-12 text-right border-bottom mb-5">
+                                        <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                                     </div>
-                                @endif
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-md-6">
+                                        <span class="text-black">Total</span>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <strong
+                                            class="text-black total-cart-price">Rp{{ number_format($carts->sum(fn($cart) => $cart->product->price * $cart->quantity)) }}</strong>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('checkout.page') }}" class="btn btn-primary btn-md w-100">
+                                            Lanjutkan Pembelian
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        @endif
+    </div>
 @endsection
 
 @push('javascript')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.quantity-increase').forEach(button => {
+            const decreaseButtons = document.querySelectorAll('.decrease');
+            const increaseButtons = document.querySelectorAll('.increase');
+            const totalCartPriceElement = document.querySelector('.total-cart-price');
+
+            decreaseButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    console.log('Increase button clicked');
-                    updateQuantity(this.dataset.cartId, 1);
+                    const quantityInput = this.closest('.quantity-container').querySelector(
+                        '.quantity-amount');
+                    let quantity = parseInt(quantityInput.value);
+                    if (quantity > 1) {
+                        quantity--;
+                        quantityInput.value = quantity;
+                        updatePrice(this, quantity);
+                        updateCartQuantity(this.closest('tr').dataset.cartId, quantity);
+                    }
                 });
             });
 
-            document.querySelectorAll('.quantity-decrease').forEach(button => {
+            increaseButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    console.log('Decrease button clicked');
-                    updateQuantity(this.dataset.cartId, -1);
+                    const quantityInput = this.closest('.quantity-container').querySelector(
+                        '.quantity-amount');
+                    let quantity = parseInt(quantityInput.value);
+                    quantity++;
+                    quantityInput.value = quantity;
+                    updatePrice(this, quantity);
+                    updateCartQuantity(this.closest('tr').dataset.cartId, quantity);
                 });
             });
 
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('change', function() {
-                    updateQuantity(this.dataset.cartId, 0, this.value);
-                });
-            });
+            function updatePrice(button, quantity) {
+                const price = button.getAttribute('data-price');
+                const priceElement = button.closest('tr').querySelector('.price');
+                const newPrice = parseInt(price) * quantity;
+                priceElement.textContent = `Rp${newPrice.toLocaleString()}`;
 
-            // Initial subtotal calculation on page load
-            updateSubtotal();
-        });
-
-        function updateQuantity(cartId, change, newValue = null) {
-            const quantityInput = document.querySelector(`.quantity-input[data-cart-id='${cartId}']`);
-            const productPrice = quantityInput.closest('.product').querySelector('.product-price');
-            const pricePerUnit = parseFloat(productPrice.dataset.price);
-
-            let quantity = parseInt(quantityInput.value);
-
-            if (newValue !== null) {
-                quantity = parseInt(newValue);
-            } else {
-                quantity += change;
+                updateTotalCartPrice();
             }
 
-            if (quantity < 1) quantity = 1;
 
-            console.log(`Updating quantity for cart ID ${cartId} to ${quantity}`);
-
-            fetch(`/cart/${cartId}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        quantity: quantity
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        quantityInput.value = quantity;
-                        productPrice.textContent = (quantity * pricePerUnit).toLocaleString('id-ID');
-                        updateSubtotal();
-                    } else {
-                        console.error('Failed to update cart:', data);
-                    }
-                }).catch(error => {
-                    console.error('Error updating cart:', error);
+            function updateTotalCartPrice() {
+                let totalCartPrice = 0;
+                document.querySelectorAll('.price').forEach(priceElement => {
+                    totalCartPrice += parseInt(priceElement.textContent.replace('Rp', '').replace(',', ''));
                 });
-        }
+                totalCartPriceElement.textContent = `Rp${totalCartPrice.toLocaleString()}`;
+            }
 
-        function updateSubtotal() {
-            let subtotal = 0;
-            document.querySelectorAll('.product-price').forEach(priceElement => {
-                subtotal += parseInt(priceElement.textContent.replace(/\D/g, ''));
+            function updateCartQuantity(cartId, quantity) {
+                fetch(`/cart/${cartId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            quantity: quantity
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Handle success, if needed
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-cart-item');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const cartId = this.closest('tr').dataset.cartId;
+                    deleteCartItem(cartId, this.closest('tr'));
+                });
             });
-            document.getElementById('cart-subtotal').textContent = subtotal.toLocaleString('id-ID');
-        }
+
+            function deleteCartItem(cartId, rowElement) {
+                fetch(`/cart/${cartId}/delete`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            rowElement.remove();
+                            updateTotalCartPrice();
+                            if (document.querySelectorAll('tbody tr').length === 0) {
+                                document.querySelector('.site-blocks-table').innerHTML =
+                                    '<div class="text-center"><h5>Tidak ada produk dalam keranjang.</h5></div>';
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function updateTotalCartPrice() {
+                let totalCartPrice = 0;
+                document.querySelectorAll('.price').forEach(priceElement => {
+                    totalCartPrice += parseInt(priceElement.textContent.replace('Rp', '').replace(',', ''));
+                });
+                document.querySelector('.total-cart-price').textContent = `Rp${totalCartPrice.toLocaleString()}`;
+            }
+        });
     </script>
 @endpush

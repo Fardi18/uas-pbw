@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">TrList ansaction</h1>
+                    <h1 class="m-0">List Tansaction</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/owner">Home</a></li>
-                        <li class="breadcrumb-item active">TrList ansaction</li>
+                        <li class="breadcrumb-item"><a href="{{ url('admin-index') }}">Home</a></li>
+                        <li class="breadcrumb-item active">List Transaction</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -54,8 +54,9 @@
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('admin.show.transaction', $transaction) }}"
-                                                            class="btn btn-sm btn-warning">Detail
-                                                            Transaksi</a>
+                                                            class="btn btn-sm btn-warning">
+                                                            <i class="fa-regular fa-eye"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach

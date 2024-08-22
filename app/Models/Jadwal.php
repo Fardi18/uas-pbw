@@ -10,13 +10,20 @@ class Jadwal extends Model
     use HasFactory;
 
     protected $fillable = [
-        'senin',
-        'selasa',
-        'rabu',
-        'kamis',
-        'jumat',
-        'sabtu',
-        'minggu',
+        'senin_buka',
+        'senin_tutup',
+        'selasa_buka',
+        'selasa_tutup',
+        'rabu_buka',
+        'rabu_tutup',
+        'kamis_buka',
+        'kamis_tutup',
+        'jumat_buka',
+        'jumat_tutup',
+        'sabtu_buka',
+        'sabtu_tutup',
+        'minggu_buka',
+        'minggu_tutup',
         'bengkel_id'
     ];
 

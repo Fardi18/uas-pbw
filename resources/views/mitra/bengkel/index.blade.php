@@ -38,7 +38,7 @@
                             <tr>
                                 <th>Gambar</th>
                                 <th>Nama Bengkel</th>
-                                <th>Alamat</th>
+                                <th>Spesialis</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -52,7 +52,17 @@
                                         @endif
                                     </td>
                                     <td>{{ $bengkel->name }}</td>
-                                    <td>{{ $bengkel->alamat }}</td>
+                                    <td>
+                                        @if ($bengkel->specialists->isNotEmpty())
+                                            <ol>
+                                                @foreach ($bengkel->specialists as $specialist)
+                                                    <li>{{ $specialist->name }}</li>
+                                                @endforeach
+                                            </ol>
+                                        @else
+                                            <span>Belum ada spesialis</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="/owner/bengkel/{{ $bengkel->id }}/edit" type="button"
                                             class="btn btn-sm btn-warning">Edit</a>
