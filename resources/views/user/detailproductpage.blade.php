@@ -25,6 +25,7 @@
                     <div class="">
                         <p class="m-0">Stock: {{ $product->stock }}</p>
                         <p class="m-0">Berat: {{ $product->weight }}kg</p>
+                        <p class="m-0">Nama Bengkel: {{ $product->bengkel->name }}</p>
                     </div>
                     <h4 class="mt-3 mb-5">Rp{{ number_format($product->price) }}</h4>
                     @if ($errors->any())
@@ -44,7 +45,7 @@
                     </form>
                 </div>
             </div>
-            <div class="row bg-light p-5">
+            <div class="row bg-light p-5 my-5">
                 <div class="col">
                     <h3 class="mb-3">Deskripsi</h3>
                     <p style="text-align: justify">{{ $product->description }}</p>

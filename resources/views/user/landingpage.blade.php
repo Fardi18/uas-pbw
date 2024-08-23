@@ -41,8 +41,13 @@
                         <a class="product-item" href="/detailproductpage/{{ $product->id }}">
                             <img src="{{ asset('images/' . $product->image) }}" class="img-fluid product-thumbnail"
                                 style="height: 260px; object-fit: cover">
-                            <h3 class="product-title">{{ $product->name }}</h3>
-                            <strong class="product-price">Rp {{ number_format($product->price) }}</strong>
+                            <div class="d-flex justify-content-between align-items-end px-3">
+                                <div>
+                                    <h3 class="product-title">{{ $product->name }}</h3>
+                                    <h3 class="product-title">{{ $product->bengkel->name }}</h3>
+                                </div>
+                                <h3 class="product-price">Rp{{ number_format($product->price) }}</h1>
+                            </div>
 
                             <span class="icon-cross" href="/detailproductpage/{{ $product->id }}">
                                 <img src="{{ asset('/user-tamplate/images/cross.svg') }}" class="img-fluid">

@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+
+use App\Models\Product;
+use App\Models\Bengkel;
+use App\Models\PemilikBengkel;
 
 class PageController extends Controller
 {
     public function home()
     {
         // Mengambil 3 produk terbaru berdasarkan created_at
-        $products = Product::orderBy('created_at', 'desc')->take(3)->get();
+        $products = Product::with('bengkel')->orderBy('created_at', 'desc')->take(3)->get();
 
         return view("user.landingpage", compact('products'));
     }
+
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-        $product = Product::where('name', 'LIKE', '%' . $keyword . '%')
+        $product = Product::with('bengkel')->where('name', 'LIKE', '%' . $keyword . '%')
             ->paginate(10);
         return view('user.productpage', ['products' => $product]);
     }
