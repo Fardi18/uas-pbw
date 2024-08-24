@@ -28,7 +28,6 @@
                     @if ($bengkels->isEmpty())
                         <a href="/owner/bengkel/add" class="btn btn-sm btn-primary">+ Tambah Bengkel</a>
                     @else
-                        <a href="/owner/bengkel/add" class="btn btn-sm btn-primary disabled">+ Tambah Bengkel</a>
                     @endif
                 </div>
                 <!-- /.card-header -->

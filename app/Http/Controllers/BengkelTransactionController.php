@@ -62,7 +62,7 @@ class BengkelTransactionController extends Controller
             'shipping_status' => $validated['shipping_status']
         ]);
 
-        return redirect()->back()->with('success', 'Booking status Berhasil Diubah!');
+        return redirect()->back()->with('success', 'Shipping status Berhasil Diubah!');
     }
 
     public function create($bookingId)

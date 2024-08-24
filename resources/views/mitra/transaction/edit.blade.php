@@ -36,11 +36,16 @@
                                 <label>Status Pengiriman</label>
                                 <select class="form-control select2" style="width: 100%;" id="status"
                                     name="shipping_status">
-                                    <option selected="selected">-- Pilih Status Pengiriman --</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Disiapkan">Disiapkan</option>
-                                    <option value="Dikirim">Dikirim</option>
-                                    <option value="Selesai">Selesai</option>
+                                    <option>-- Pilih Status Pengiriman --</option>
+                                    <option value="Pending"
+                                        {{ $transaction->shipping_status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="Disiapkan"
+                                        {{ $transaction->shipping_status == 'Disiapkan' ? 'selected' : '' }}>Disiapkan
+                                    </option>
+                                    <option value="Dikirim"
+                                        {{ $transaction->shipping_status == 'Dikirim' ? 'selected' : '' }}>Dikirim</option>
+                                    <option value="Selesai"
+                                        {{ $transaction->shipping_status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                                 </select>
                             </div>
                             <div class="action-user d-flex justify-content-end align-items-center">

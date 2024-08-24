@@ -57,22 +57,32 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="kecamatan_id" class="form-label">Kecamatan</label>
-                                <select class="form-select" aria-label="Default select example" name="kecamatan_id">
-                                    <option selected>-- Pilih Kecamatan --</option>
+                                <select class="form-select" aria-label="Default select example" name="kecamatan_id"
+                                    id="kecamatan_id">
+                                    <option value="">-- Pilih Kecamatan --</option>
                                     @foreach ($kecamatans as $kecamatan)
-                                        <option value="{{ $kecamatan->id }}">{{ $kecamatan->name }}</option>
+                                        <option value="{{ $kecamatan->id }}"
+                                            {{ $users->kecamatan_id == $kecamatan->id ? 'selected' : '' }}>
+                                            {{ $kecamatan->name }}
+                                        </option>
                                     @endforeach
                                 </select>
+
                             </div>
 
                             <div class="col">
                                 <label for="kelurahan_id" class="form-label">Kelurahan</label>
-                                <select class="form-select" aria-label="Default select example" name="kelurahan_id">
-                                    <option selected>-- Pilih Kelurahan --</option>
+                                <select class="form-select" aria-label="Default select example" name="kelurahan_id"
+                                    id="kelurahan_id">
+                                    <option value="">-- Pilih Kelurahan --</option>
                                     @foreach ($kelurahans as $kelurahan)
-                                        <option value="{{ $kelurahan->id }}">{{ $kelurahan->name }}</option>
+                                        <option value="{{ $kelurahan->id }}"
+                                            {{ $users->kelurahan_id == $kelurahan->id ? 'selected' : '' }}>
+                                            {{ $kelurahan->name }}
+                                        </option>
                                     @endforeach
                                 </select>
+
                             </div>
                         </div>
 
@@ -97,3 +107,50 @@
 
     </section>
 @endsection
+
+@push('javascript')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function() {
+            var selectedKecamatanId = $('#kecamatan_id').val();
+            if (selectedKecamatanId) {
+                $.ajax({
+                    url: '/get-kelurahans/' + selectedKecamatanId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#kelurahan_id').empty();
+                        $('#kelurahan_id').append('<option selected>-- Pilih Kelurahan --</option>');
+                        $.each(data, function(key, value) {
+                            var isSelected = value.id == "{{ $users->kelurahan_id }}" ?
+                                'selected' : '';
+                            $('#kelurahan_id').append('<option value="' + value.id + '" ' +
+                                isSelected + '>' + value.name + '</option>');
+                        });
+                    }
+                });
+            }
+
+            $('#kecamatan_id').change(function() {
+                var kecamatan_id = $(this).val();
+                $.ajax({
+                    url: '/get-kelurahans/' + kecamatan_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#kelurahan_id').empty();
+                        $('#kelurahan_id').append(
+                            '<option selected>-- Pilih Kelurahan --</option>');
+                        $.each(data, function(key, value) {
+                            $('#kelurahan_id').append('<option value="' + value.id +
+                                '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use App\Models\CategoryKendaraan;
-use App\Models\DetailLayananBooking;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
-use App\Models\Kendaraan;
-use App\Models\Layanan;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PDF;
 
 class ProfileUserController extends Controller
 {
@@ -37,7 +32,11 @@ class ProfileUserController extends Controller
 
         return view(
             'user/profileuseredit',
-            ['users' => $dataUser, 'kecamatans' => $kecamatans, 'kelurahans' => $kelurahans]
+            [
+                'users' => $dataUser,
+                'kecamatans' => $kecamatans,
+                'kelurahans' => $kelurahans
+            ]
         );
     }
 

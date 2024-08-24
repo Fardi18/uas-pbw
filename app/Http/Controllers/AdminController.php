@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
+// models
 use App\Models\User;
 use App\Models\Bengkel;
 use App\Models\Booking;
-use App\Models\Kendaraan;
 use App\Models\Transaction;
-use Illuminate\Http\Request;
+use App\Models\WithdrawRequest;
 use App\Models\PemilikBengkel;
 use App\Models\DetailLayananBooking;
-use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -19,8 +20,18 @@ class AdminController extends Controller
         $userCount = User::count();
         $bengkelCount = Bengkel::count();
         $ownerCount = PemilikBengkel::count();
+        $bookingCount = Booking::count();
+        $transactionCount = Transaction::count();
+        $pencairanCount = WithdrawRequest::count();
 
-        return view('admin.dashboard', ['owners_count' => $ownerCount, 'users_count' => $userCount, 'bengkels_count' => $bengkelCount]);
+        return view('admin.dashboard', [
+            'owner_count' => $ownerCount,
+            'user_count' => $userCount,
+            'bengkel_count' => $bengkelCount,
+            'booking_count' => $bookingCount,
+            'transaction_count' => $transactionCount,
+            'pencairan_count' => $pencairanCount,
+        ]);
     }
 
     public function listuser(Request $request)

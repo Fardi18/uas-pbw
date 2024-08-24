@@ -56,8 +56,6 @@ class ServiceController extends Controller
         ]);
     }
 
-
-
     public function getKelurahans($kecamatan_id)
     {
         $kelurahans = Kelurahan::where('kecamatan_id', $kecamatan_id)->get();

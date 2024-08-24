@@ -42,33 +42,32 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Deskripsi Produk</label>
-                            <textarea type="text" class="form-control" id="description" name="description" placeholder="Deskripsi produk">{{ $product->description }}</textarea>
+                            <textarea type="text" class="form-control" id="description" name="description" placeholder="Deskripsi produk"
+                                rows="5">{{ $product->description }}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="price">Harga Produk</label>
-                            <input type="number" class="form-control" id="price" name="price"
-                                placeholder="Harga product" value="{{ $product->price }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Berat Produk (kg)</label>
-                            <input type="number" class="form-control" id="weight" name="weight"
-                                placeholder="Berat product" value="{{ $product->weight }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Stok Produk</label>
-                            <input type="number" class="form-control" id="stock" name="stock"
-                                placeholder="Stock product" value="{{ $product->stock }}">
-                        </div>
-                        {{-- <div class="form-group">
-                            <label for="image">Gambar Produk</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="image" name="image"
-                                        value="{{ $product->image }}">
-                                    <label class="custom-file-label" for="image">Cari Foto</label>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="price">Harga Produk</label>
+                                    <input type="number" class="form-control" id="price" name="price"
+                                        placeholder="Harga product" value="{{ $product->price }}">
                                 </div>
                             </div>
-                        </div> --}}
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="price">Berat Produk (kg)</label>
+                                    <input type="number" class="form-control" id="weight" name="weight"
+                                        placeholder="Berat product" value="{{ $product->weight }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="price">Stok Produk</label>
+                                    <input type="number" class="form-control" id="stock" name="stock"
+                                        placeholder="Stock product" value="{{ $product->stock }}">
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="image">Gambar Produk</label>
                             <img id="image-preview" src="{{ asset('storage/' . $product->image) }}" alt="Image Preview"

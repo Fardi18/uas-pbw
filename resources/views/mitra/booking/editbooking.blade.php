@@ -34,14 +34,27 @@
                             @csrf
                             <div class="form-group">
                                 <label>Status Booking</label>
-                                <select class="form-control select2" style="width: 100%;" id="status"
+                                {{-- <select class="form-control select2" style="width: 100%;" id="status"
                                     name="booking_status">
                                     <option selected="selected">-- Pilih Status --</option>
                                     <option value="Pending">Pending</option>
                                     <option value="Diterima">Diterima</option>
                                     <option value="Ditolak">Ditolak</option>
                                     <option value="Selesai">Selesai</option>
+                                </select> --}}
+                                <select class="form-control select2" style="width: 100%;" id="status"
+                                    name="booking_status">
+                                    <option>-- Pilih Status --</option>
+                                    <option value="Pending" {{ $booking->booking_status == 'Pending' ? 'selected' : '' }}>
+                                        Pending</option>
+                                    <option value="Diterima" {{ $booking->booking_status == 'Diterima' ? 'selected' : '' }}>
+                                        Diterima</option>
+                                    <option value="Ditolak" {{ $booking->booking_status == 'Ditolak' ? 'selected' : '' }}>
+                                        Ditolak</option>
+                                    <option value="Selesai" {{ $booking->booking_status == 'Selesai' ? 'selected' : '' }}>
+                                        Selesai</option>
                                 </select>
+
                             </div>
                             <div class="action-user d-flex justify-content-end align-items-center">
                                 <button type="submit" class="btn btn-primary mt-3">Submit</button>

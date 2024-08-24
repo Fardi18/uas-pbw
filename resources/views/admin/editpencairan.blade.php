@@ -39,34 +39,44 @@
                         <div class="form-group">
                             <label for="name">Total Pencairan</label>
                             <input type="number" class="form-control" placeholder="Pendapatan Saat Ini"
-                                value="{{ number_format($pencairan->amount, 0, ',', '.') }}" readonly>
+                                value="{{ number_format($pencairan->amount, 0, ',', '.') }}" readonly disabled>
                         </div>
                         <div class="form-group">
                             <label for="name">Tanggal Pencairan</label>
                             <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
-                                value="{{ $pencairan->created_at }}" required>
+                                value="{{ $pencairan->created_at }}" required disabled>
                         </div>
-                        <div class="form-group">
-                            <label for="name">Bank Tujuan</label>
-                            <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
-                                value="{{ $pencairan->bank }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Rekening Tujuan</label>
-                            <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
-                                value="{{ $pencairan->number }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Pemilik Rekening Tujuan</label>
-                            <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
-                                value="{{ $pencairan->name }}" required>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="name">Bank Tujuan</label>
+                                    <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
+                                        value="{{ $pencairan->bank }}" required disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="name">Rekening Tujuan</label>
+                                    <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
+                                        value="{{ $pencairan->number }}" required disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="name">Pemilik Rekening Tujuan</label>
+                                    <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
+                                        value="{{ $pencairan->name }}" required disabled>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Status Pencairan</label>
                             <select class="form-control select2" style="width: 100%;" id="status" name="status">
-                                <option selected="selected">-- Pilih Status --</option>
-                                <option value="pending">Pending</option>
-                                <option value="transferred">Transferred</option>
+                                <option>-- Pilih Status --</option>
+                                <option value="pending" {{ $pencairan->status == 'pending' ? 'selected' : '' }}>Pending
+                                </option>
+                                <option value="transferred" {{ $pencairan->status == 'transferred' ? 'selected' : '' }}>
+                                    Transferred</option>
                             </select>
                         </div>
                         <div class="form-group">

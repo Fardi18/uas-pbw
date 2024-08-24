@@ -41,11 +41,11 @@ use Illuminate\Support\Str;
 |
 */
 
-Route::get('/', [PageController::class, 'home']);
-Route::get('/servicepage', [ServiceController::class, 'index']);
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/servicepage', [ServiceController::class, 'index'])->name('service');
 Route::get('/kelurahan/{kecamatan_id}', [ServiceController::class, 'getKelurahans']);
 Route::get('/detailbengkelpage/{id}', [ServiceController::class, 'detailBengkel']);
-Route::get('/productpage', [PageController::class, 'index']);
+Route::get('/productpage', [PageController::class, 'index'])->name('product');
 Route::get('/detailproductpage/{id}', [PageController::class, 'detailProduct']);
 
 

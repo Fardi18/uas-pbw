@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Deskripsi Produk</label>
                             <textarea rows="5" type="text" class="form-control" id="description" name="description"
-                                placeholder="Deskripsi produk"></textarea>
+                                placeholder="Deskripsi produk" rows="5"></textarea>
                         </div>
                         <div class="row">
                             <div class="col">
