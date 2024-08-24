@@ -59,7 +59,7 @@
                             <input type="number" class="form-control" id="stock" name="stock"
                                 placeholder="Stock product" value="{{ $product->stock }}">
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="image">Gambar Produk</label>
                             <div class="input-group">
                                 <div class="custom-file">
@@ -68,7 +68,20 @@
                                     <label class="custom-file-label" for="image">Cari Foto</label>
                                 </div>
                             </div>
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="image">Gambar Produk</label>
+                            <img id="image-preview" src="{{ asset('storage/' . $product->image) }}" alt="Image Preview"
+                                style="display: block; margin-top: 10px; max-width: 400px; max-height: 400px;"
+                                class="mb-2">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <label class="custom-file-label" for="image">Cari Foto</label>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                     <!-- /.card-body -->
 
@@ -81,3 +94,19 @@
         </div>
     </div>
 @endsection
+@push('javascript')
+    <script>
+        document.getElementById('image').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var preview = document.getElementById('image-preview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
+@endpush

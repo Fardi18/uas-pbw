@@ -38,13 +38,14 @@ class WithdrawRequestController extends Controller
         $totalTransaksi = Transaction::where('bengkel_id', $bengkel_id)
             ->where('payment_status', 'success')
             ->whereNull('withdrawn_at') // Transaksi yang belum dicairkan
-            ->sum(DB::raw('grand_total - (ongkir + administrasi)'));
+            ->sum(DB::raw('(grand_total + ongkir) - administrasi'));
 
         return view('mitra.withdrawal_requests.add', compact('totalTransaksi'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $pemilik = Auth::user();
         $pemilik_id = $pemilik->id;
         $bengkel = Bengkel::where('pemilik_id', $pemilik_id)->first();
@@ -54,7 +55,7 @@ class WithdrawRequestController extends Controller
         $totalTransaksi = Transaction::where('bengkel_id', $bengkel_id)
             ->where('payment_status', 'success')
             ->whereNull('withdrawn_at') // Transaksi yang belum dicairkan
-            ->sum(DB::raw('grand_total - (ongkir + administrasi)'));
+            ->sum(DB::raw('(grand_total + ongkir) - administrasi'));
 
         // Cek apakah total transaksi sudah melebihi 50 ribu
         if ($totalTransaksi < 50000) {
@@ -67,9 +68,17 @@ class WithdrawRequestController extends Controller
 
         DB::transaction(function () use ($request, $bengkel_id) {
             // Buat pencairan
+            $totalTransaksi = Transaction::where('bengkel_id', $bengkel_id)
+                ->where('payment_status', 'success')
+                ->whereNull('withdrawn_at') // Transaksi yang belum dicairkan
+                ->sum(DB::raw('(grand_total + ongkir) - administrasi'));
+
             WithdrawRequest::create([
                 'bengkel_id' => $bengkel_id,
-                'amount' => $request->amount,
+                'amount' => $totalTransaksi,
+                'bank' => $request->bank,
+                'number' => $request->number,
+                'name' => $request->name,
                 'status' => 'pending',
             ]);
 

@@ -69,14 +69,23 @@ class BookingController extends Controller
             return redirect()->back()->withErrors(['waktu_booking' => 'Waktu booking harus berada dalam jam operasional bengkel.']);
         }
 
+        // $existingBooking = Booking::where('bengkel_id', $request->bengkel_id)
+        //     ->where('tanggal_booking', $request->tanggal_booking)
+        //     ->where('waktu_booking', $request->waktu_booking)
+        //     ->first();
+
+        // if ($existingBooking) {
+        //     return redirect()->back()->withErrors(['waktu_booking' => 'Waktu booking sudah diambil oleh user lain. Silakan pilih waktu lain.']);
+        // }
         $existingBooking = Booking::where('bengkel_id', $request->bengkel_id)
             ->where('tanggal_booking', $request->tanggal_booking)
-            ->where('waktu_booking', $request->waktu_booking)
+            ->whereRaw('HOUR(waktu_booking) = ?', [$waktu_booking->format('H')])
             ->first();
 
         if ($existingBooking) {
-            return redirect()->back()->withErrors(['waktu_booking' => 'Waktu booking sudah diambil oleh user lain. Silakan pilih waktu lain.']);
+            return redirect()->back()->withErrors(['waktu_booking' => 'Jam booking sudah diambil oleh user lain. Silakan pilih jam lain.']);
         }
+
 
         $booking = Booking::create([
             'user_id' => Auth::id(),

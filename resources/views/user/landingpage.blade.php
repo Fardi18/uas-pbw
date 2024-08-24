@@ -154,7 +154,7 @@
                         <li>Mencari informasi bengkel terdekat dengan lokasimu</li>
                         <li>Membantu untuk mendapatkan informasi lainnya</li>
                     </ul>
-                    <p><a herf="/servicepage" class="btn">Explore</a></p>
+                    {{-- <p><a herf="/servicepage" class="btn">Explore</a></p> --}}
                 </div>
             </div>
         </div>

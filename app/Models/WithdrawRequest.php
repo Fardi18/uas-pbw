@@ -9,7 +9,15 @@ class WithdrawRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['bengkel_id', 'amount', 'status', 'image'];
+    protected $fillable = [
+        'bengkel_id',
+        'amount',
+        'status',
+        'image',
+        'name',
+        'bank',
+        'number',
+    ];
 
     public function bengkel()
     {

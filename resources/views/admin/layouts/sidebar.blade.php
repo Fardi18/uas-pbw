@@ -87,7 +87,7 @@
                     <a href="{{ route('admin.pencairan') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Permintaan Pencairan
+                            Laporan Pencairan
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

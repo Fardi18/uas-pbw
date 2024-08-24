@@ -154,12 +154,9 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Gambar Bengkel</label>
-                            @if ($bengkel->image)
-                                <div class="mt-3">
-                                    <img src="{{ asset('images/' . $bengkel->image) }}" alt="Gambar Bengkel" width="400px"
-                                        class="mb-5">
-                                </div>
-                            @endif
+                            <img id="image-preview" src="{{ asset('storage/' . $bengkel->image) }}" alt="Image Preview"
+                                style="display: block; margin-top: 10px; max-width: 400px; max-height: 400px;"
+                                class="mb-2">
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image">
@@ -204,6 +201,20 @@
                     }
                 });
             });
+        });
+    </script>
+    <script>
+        document.getElementById('image').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var preview = document.getElementById('image-preview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
         });
     </script>
 @endpush

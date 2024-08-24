@@ -64,7 +64,9 @@
                                         <p>{{ $transaction->user->name }}</p>
                                     </td>
                                     <td>
-                                        <p>{{ $transaction->user->alamat }}</p>
+                                        <p>{{ $transaction->user->alamat }},
+                                            {{ $transaction->user->kecamatan->name ?? 'N/A' }},
+                                            {{ $transaction->user->kelurahan->name ?? 'N/A' }}</p>
                                     </td>
                                     {{-- <td>
                                         <p>{{ $transaction->catatan_tambahan }}</p>

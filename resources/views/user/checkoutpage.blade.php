@@ -34,7 +34,7 @@
                             <div class="col-md-12">
                                 <label for="name" class="text-black">Nama<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ Auth::user()->name }}">
+                                    value="{{ Auth::user()->name }}" readonly>
                             </div>
                         </div>
 
@@ -42,12 +42,12 @@
                             <div class="col-md-6">
                                 <label for="email" class="text-black">Email</label>
                                 <input type="text" class="form-control" id="email" name="email"
-                                    value="{{ Auth::user()->email }}">
+                                    value="{{ Auth::user()->email }}" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="phone_number" class="text-black">Phone Number</label>
                                 <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                    value="{{ Auth::user()->phone_number }}">
+                                    value="{{ Auth::user()->phone_number }}" readonly>
                             </div>
                         </div>
 
@@ -55,12 +55,12 @@
                             <div class="col-md-6">
                                 <label for="kecamatan" class="text-black">Kecamatan</label>
                                 <input type="text" class="form-control" id="kecamatan" name="kecamatan"
-                                    value="{{ $user->kecamatan->name }}">
+                                    value="{{ $user->kecamatan->name }}" readonly>
                             </div>
                             <div class="col-md-6">
-                                <label for="kelurahan" class="text-black">Keluurahan</label>
+                                <label for="kelurahan" class="text-black">Kelurahan</label>
                                 <input type="text" class="form-control" id="kelurahan" name="kelurahan"
-                                    value="{{ $user->kelurahan->name }}">
+                                    value="{{ $user->kelurahan->name }}" readonly>
                             </div>
                         </div>
 
@@ -69,7 +69,7 @@
                                 <label for="alamat" class="text-black">Alamat Lengkap <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="alamat" name="alamat"
-                                    placeholder="Street address" value="{{ Auth::user()->alamat }}">
+                                    placeholder="Street address" value="{{ Auth::user()->alamat }}" readonly>
                             </div>
                         </div>
 

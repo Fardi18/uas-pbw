@@ -34,6 +34,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Tanggal Pencairan</th>
+                                <th>Bank Tujuan</th>
                                 <th>Status Pencairan</th>
                                 <th>Jumlah</th>
                                 <th>Action</th>
@@ -45,6 +46,9 @@
                                     <td>{{ $loop->iteration }}.</td>
                                     <td>
                                         {{ $pencairan->created_at }}
+                                    </td>
+                                    <td>
+                                        {{ $pencairan->bank }}
                                     </td>
                                     <td>
                                         {{ $pencairan->status }}

@@ -23,6 +23,7 @@
                         <th scope="col">No.</th>
                         <th scope="col">Nama Bengkel</th>
                         <th scope="col">Jumlah</th>
+                        <th scope="col">Bank Tujuan</th>
                         <th scope="col">Status</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Action</th>
@@ -34,6 +35,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $pencairan->bengkel->name }}</td>
                             <td>{{ number_format($pencairan->amount) }}</td>
+                            <td>{{ $pencairan->bank }}</td>
                             <td>{{ $pencairan->status }}</td>
                             <td>{{ $pencairan->created_at }}</td>
                             <td>

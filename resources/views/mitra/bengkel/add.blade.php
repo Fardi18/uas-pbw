@@ -82,6 +82,9 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Gambar Bengkel</label>
+                            <img id="image-preview" src="#" alt="Image Preview"
+                                style="display: none; margin-top: 10px; max-width: 400px; max-height: 400px;"
+                                class="mb-2">
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image">
@@ -125,6 +128,20 @@
                         });
                     }
                 });
+            });
+
+            // Handle image preview
+            $('#image').change(function(event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var preview = document.getElementById('image-preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
             });
         });
     </script>

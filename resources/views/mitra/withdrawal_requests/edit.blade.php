@@ -44,6 +44,18 @@
                             <td>{{ $pencairan->status }}</td>
                         </tr>
                         <tr>
+                            <th>Rekening Pencairan</th>
+                            <td>{{ $pencairan->number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Bank Pencairan</th>
+                            <td>{{ $pencairan->bank }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pemilik Rekening</th>
+                            <td>{{ $pencairan->name }}</td>
+                        </tr>
+                        <tr>
                             <th>Bukti Pencairan</th>
                             <td>
                                 <img src="{{ asset('images/' . $pencairan->image) }}" style="width: 500px; height:auto">

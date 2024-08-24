@@ -160,14 +160,13 @@
                 fetch(`/api/bengkel/${bengkelId}/booked-times?date=${selectedDate}`)
                     .then(response => response.json())
                     .then(data => {
-                        const disabledTimes = data.map(booking => booking.waktu_booking.slice(0,
-                        5)); // Get time part only
+                        const bookedHours = data.map(booking => booking.waktu_booking.slice(0,
+                            2)); // Get hour part only
 
                         bookingInput.addEventListener('input', function() {
-                            const selectedTime = bookingInput.value;
-                            if (disabledTimes.includes(selectedTime)) {
-                                alert(
-                                    'Waktu ini sudah dipesan oleh user lain. Silakan pilih waktu lain.');
+                            const selectedHour = bookingInput.value.slice(0, 2);
+                            if (bookedHours.includes(selectedHour)) {
+                                alert('Jam ini sudah dipesan oleh user lain. Silakan pilih jam lain.');
                                 bookingInput.value = ''; // Reset input waktu_booking
                             }
                         });

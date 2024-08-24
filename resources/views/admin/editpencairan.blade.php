@@ -47,6 +47,21 @@
                                 value="{{ $pencairan->created_at }}" required>
                         </div>
                         <div class="form-group">
+                            <label for="name">Bank Tujuan</label>
+                            <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
+                                value="{{ $pencairan->bank }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Rekening Tujuan</label>
+                            <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
+                                value="{{ $pencairan->number }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Pemilik Rekening Tujuan</label>
+                            <input type="text" class="form-control" placeholder="Jumlah yang ditarik"
+                                value="{{ $pencairan->name }}" required>
+                        </div>
+                        <div class="form-group">
                             <label>Status Pencairan</label>
                             <select class="form-control select2" style="width: 100%;" id="status" name="status">
                                 <option selected="selected">-- Pilih Status --</option>

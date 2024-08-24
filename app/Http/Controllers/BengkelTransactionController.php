@@ -24,7 +24,7 @@ class BengkelTransactionController extends Controller
         $bengkel = Bengkel::where('pemilik_id', $owner_id)->first(); // Mengambil record pertama
         if ($bengkel) {
             $bengkel_id = $bengkel->id; // Mengambil nilai id dari record tersebut
-            $transactions = Transaction::where('bengkel_id', $bengkel_id)->orderBy('created_at', 'desc')->get();
+            $transactions = Transaction::with('user')->where('bengkel_id', $bengkel_id)->orderBy('created_at', 'desc')->get();
         } else {
             // Handle jika tidak ada bengkel yang ditemukan untuk owner_id tersebut
             $transactions = collect(); // Mengembalikan collection kosong
@@ -36,6 +36,8 @@ class BengkelTransactionController extends Controller
     public function show(Transaction $transaction)
     {
         $details = $transaction->detail_transactions()->with('product', 'layanan', 'bengkel')->get();
+        // Memuat relasi kecamatan dan kelurahan melalui relasi user
+        $transaction->load('user.kecamatan', 'user.kelurahan');
 
         return view('mitra.transaction.show', compact('transaction', 'details'));
     }

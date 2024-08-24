@@ -43,7 +43,22 @@
                             <label for="name">Jumlah yang ditarik</label>
                             <input type="number" class="form-control" id="amount" name="amount"
                                 placeholder="Jumlah yang ditarik" min="{{ $totalTransaksi }}" max="{{ $totalTransaksi }}"
+                                value="{{ $totalTransaksi }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nama Bank</label>
+                            <input type="text" class="form-control" id="bank" name="bank" placeholder="Nama bank"
                                 required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nomor Rekening</label>
+                            <input type="text" class="form-control" id="number" name="number"
+                                placeholder="Nomor rekening" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nama Pemilik Rekening</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Atas nama rekening" required>
                         </div>
                     </div>
                     <!-- /.card-body -->
