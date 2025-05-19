@@ -21,11 +21,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html
 
-# Install dependencies (pastikan folder vendor tersedia)
-RUN composer install || true
+# Copy Laravel source code
+COPY . /var/www/html
 
-# Expose port Laravel
+# Install dependencies
+RUN composer install
+
+# Expose Laravel port
 EXPOSE 8000
 
-# Jalankan Laravel otomatis saat container start
+# Start Laravel automatically
 CMD php artisan serve --host=0.0.0.0 --port=8000
